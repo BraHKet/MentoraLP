@@ -1,0 +1,292 @@
+/* --- Stili per la Landing Page --- */
+
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* VARIABILI DI DESIGN */
+:root {
+    --bg-color: #030712;
+    --text-primary: #F9FAFB;
+    --text-secondary: #9CA3AF;
+    --accent-primary: #A78BFA;
+    --accent-secondary: #C4B5FD;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --card-bg: #111827;
+}
+
+/* STILI GLOBALI */
+.landing-body {
+    background-color: var(--bg-color);
+    color: var(--text-secondary);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.background-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.landing-container {
+    position: relative;
+    z-index: 1;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* TITOLI */
+.hero-title {
+    color: var(--text-primary);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 25px rgba(167, 139, 250, 0.5);
+}
+
+.section-title {
+    color: var(--text-primary);
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+/* SEZIONE HERO */
+.hero {
+    text-align: center;
+    padding: 6rem 0;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+}
+
+.video-wrapper {
+    position: relative;
+    max-width: 100%;
+    margin: 2.5rem auto;
+    border-radius: 18px;
+}
+
+.video-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 18px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    filter: blur(8px);
+    opacity: 0.6;
+    z-index: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-wrapper:hover::before {
+    opacity: 0.9;
+}
+
+.video-container {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    background-color: #000;
+    position: relative;
+    z-index: 1;
+}
+
+.demo-video {
+    width: 100%;
+    display: block;
+}
+
+/* OFFERTA NELL'HERO */
+.hero-offer-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 650px;
+    margin: 4rem auto 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.price-highlight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: var(--bg-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.offer-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.old-price-hero {
+    font-size: 1.5rem;
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.new-price-hero {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.cta-content h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.cta-content p {
+    margin-bottom: 1.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background-image: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    color: #030712;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(167, 139, 250, 0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(167, 139, 250, 0.3);
+}
+
+.waitlist-link {
+    display: inline-block;
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.waitlist-link:hover {
+    color: var(--text-primary);
+}
+
+/* SEZIONI MAIN */
+main > section {
+    padding: 6rem 0;
+}
+
+.how-it-works {
+    border-top: 1px solid var(--border-color);
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+    text-align: center;
+}
+
+.step-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem auto;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-primary);
+}
+
+.step h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* BENEFICI */
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.check-icon {
+    color: #34D399; /* Verde Smeraldo */
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+/* FOOTER */
+.landing-footer {
+    text-align: center;
+    padding: 3rem 0;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+/* ANIMAZIONI */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 650px) {
+    .hero-offer-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+}

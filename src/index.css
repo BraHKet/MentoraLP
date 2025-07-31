@@ -1,13 +1,18 @@
-body {
+/* src/index.css */
+
+/*
+  Questo file è per gli stili globali che si applicano a tutta l'applicazione.
+  Per ora, ci basta un semplice reset per garantire coerenza tra i browser.
+  Tutti gli stili specifici della landing page sono in LandingPage.css.
+*/
+
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

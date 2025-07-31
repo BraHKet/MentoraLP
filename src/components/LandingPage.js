@@ -36,7 +36,7 @@ const LandingPage = () => {
     }, []);
 
     // --- MODIFICA QUI I TUOI LINK ---
-    const paymentLink = "https://tuo-prodotto.gumroad.com/l/abcdef"; // Sostituisci con il tuo link di pagamento (es. Gumroad)
+    const paymentLink = "https://tally.so/r/wAeeQy"; // Sostituisci con il tuo link di pagamento (es. Gumroad)
     const waitlistLink = "https://tally.so/r/n0RRaA"; // Sostituisci con il tuo link per la waitlist (es. Tally)
 
     return (
@@ -64,7 +64,7 @@ const LandingPage = () => {
                     </div>
 
                     <div className="hero-offer-box fade-in-section">
-                        <div className="price-highlight">
+                        <div href={paymentLink} className="price-highlight">
                             <span className="offer-tag">Accesso 3 mesi</span>
                             <span className="old-price-hero">€90</span>
                             <span className="new-price-hero">€19</span>

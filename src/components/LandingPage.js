@@ -65,13 +65,13 @@ const LandingPage = () => {
 
                     <div className="hero-offer-box fade-in-section">
                         <div className="price-highlight">
-                            <span className="offer-tag">Accesso Early Bird</span>
-                            <span className="old-price-hero">€99</span>
+                            <span className="offer-tag">Accesso 3 mesi</span>
+                            <span className="old-price-hero">€90</span>
                             <span className="new-price-hero">€19</span>
                         </div>
                         <div className="cta-content">
-                            <h3>Ottieni Accesso ANNUALE.</h3>
-                            <p>Un unico pagamento per avere Mentora per un anno, inclusi tutti gli aggiornamenti futuri. OFFERTA LIMITATIA AI PRIMI 100 SOSTENITORI.</p>
+                            <h3>Ottieni Accesso di 3 MESI.</h3>
+                            <p>Un unico pagamento per avere Mentora per tre mesi, inclusi tutti gli aggiornamenti futuri. OFFERTA LIMITATIA AI PRIMI 100 SOSTENITORI.</p>
                             <a href={paymentLink} className="cta-button">
                                 Sblocca l'Offerta a €19
                             </a>

@@ -282,6 +282,21 @@ main > section {
     transform: translateY(0);
 }
 
+/* NUOVI STILI PER IL BRANDING NELL'HERO */
+.hero-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem; /* Spazio tra logo e titolo */
+    margin-bottom: 1.5rem;
+}
+
+.hero-logo {
+    width: clamp(40px, 8vw, 60px); /* Dimensione del logo fluida */
+    height: auto;
+    display: block;
+}
+
 /* RESPONSIVE */
 @media (max-width: 650px) {
     .hero-offer-box {

@@ -54,6 +54,11 @@ const LandingPage = () => {
             <div className="landing-container">
                 
                 <header className="hero">
+
+                    <div className="hero-brand">
+                        <img src="/logo.png" alt="Mentora Logo" className="hero-logo" />
+                    </div>
+
                     <h1 className="hero-title">Dall'ansia da esame alla certezza di essere preparato.</h1>
                     <p className="hero-subtitle">Mentora analizza i tuoi PDF, crea un piano di studi intelligente e ti interroga come un vero professore, per darti la sicurezza che ti serve per l'esame.</p>
                     

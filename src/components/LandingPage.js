@@ -37,7 +37,7 @@ const LandingPage = () => {
 
     // --- MODIFICA QUI I TUOI LINK ---
     const paymentLink = "https://tuo-prodotto.gumroad.com/l/abcdef"; // Sostituisci con il tuo link di pagamento (es. Gumroad)
-    const waitlistLink = "https://tally.so/r/tuo-form"; // Sostituisci con il tuo link per la waitlist (es. Tally)
+    const waitlistLink = "https://tally.so/r/n0RRaA"; // Sostituisci con il tuo link per la waitlist (es. Tally)
 
     return (
         <div className="landing-body">

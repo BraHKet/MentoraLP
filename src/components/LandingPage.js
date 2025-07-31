@@ -17,6 +17,15 @@ const Icon = ({ name, className }) => {
     );
 };
 
+// Funzione helper per tracciare gli eventi in Google Analytics
+const trackEvent = (eventName, eventParams = {}) => {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', eventName, eventParams);
+  } else {
+    console.warn('Google Analytics gtag function not found.');
+  }
+};
+
 const LandingPage = () => {
     // Hook per aggiungere una classe 'visible' alle sezioni quando entrano nel viewport
     useEffect(() => {
@@ -64,21 +73,37 @@ const LandingPage = () => {
                     </div>
 
                     <div className="hero-offer-box fade-in-section">
-                        <div href={paymentLink} className="price-highlight">
+                        <a href={paymentLink} className="price-highlight" style={{ textDecoration: 'none' }} target="_blank" 
+                                rel="noopener noreferrer" onClick={() => trackEvent('begin_checkout', {
+                                currency: 'EUR',
+                                value: 19.00,
+                                event_category: 'Conversion',
+                                event_label: 'Early Bird Lifetime Deal'
+                              })}>
                             <span className="offer-tag">Accesso 3 mesi</span>
                             <span className="old-price-hero">€90</span>
                             <span className="new-price-hero">€19</span>
-                        </div>
+                        </a>
                         <div className="cta-content">
                             <h3>Ottieni Accesso di 3 MESI.</h3>
                             <p>Un unico pagamento per avere Mentora per tre mesi, inclusi tutti gli aggiornamenti futuri. OFFERTA LIMITATIA AI PRIMI 100 SOSTENITORI.</p>
-                            <a href={paymentLink} className="cta-button">
+                            <a href={paymentLink} className="cta-button"  target="_blank" 
+                                rel="noopener noreferrer" onClick={() => trackEvent('begin_checkout', {
+                                currency: 'EUR',
+                                value: 19.00,
+                                event_category: 'Conversion',
+                                event_label: 'Early Bird Lifetime Deal'
+                              })}>
                                 Sblocca l'Offerta a €19
                             </a>
                         </div>
                     </div>
                     
-                    <a href={waitlistLink} className="waitlist-link">
+                    <a href={waitlistLink} className="waitlist-link" target="_blank" 
+                        rel="noopener noreferrer" onClick={() => trackEvent('generate_lead', {
+                        event_category: 'Engagement',
+                        event_label: 'Waitlist Signup'
+                      })}>
                         Non ancora pronto? Ti avvisiamo al lancio.
                     </a>
                 </header>

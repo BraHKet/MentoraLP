@@ -47,7 +47,7 @@ const LandingPage = () => {
     // --- MODIFICA QUI I TUOI LINK ---
     const paymentLink = "https://tally.so/r/wAeeQy"; // Sostituisci con il tuo link di pagamento (es. Gumroad)
     const waitlistLink = "https://tally.so/r/n0RRaA"; // Sostituisci con il tuo link per la waitlist (es. Tally)
-    const youtubeEmbedUrl = "hhttps://youtube.com/shorts/p8Bmj1h3ITE";
+    const youtubeEmbedUrl = "https://www.youtube.com/embed/sAFrU6_mOWs?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1";
 
     return (
         <div className="landing-body">

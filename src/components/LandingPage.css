@@ -75,16 +75,19 @@
 
 .video-wrapper {
     position: relative;
-    max-width: 100%;
+    /* NUOVO: Limitiamo la larghezza massima per un look da "telefono" */
+    max-width: 350px; /* Puoi giocare con questo valore (es. 320px, 400px) */
     margin: 2.5rem auto;
-    border-radius: 18px;
+    border-radius: 24px; /* Un raggio più grande per un look più moderno da smartphone */
+    /* Manteniamo il bagliore per un effetto premium */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
 .video-wrapper::before {
     content: '';
     position: absolute;
     inset: -1px;
-    border-radius: 18px;
+    border-radius: 25px;
     background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
     filter: blur(8px);
     opacity: 0.6;
@@ -98,11 +101,13 @@
 
 .video-container {
     position: relative;
-    padding-bottom: 56.25%; /* Questo crea un aspect ratio di 16:9 (9 / 16 = 0.5625) */
+    /* NUOVO: Padding per un aspect ratio di 9:16 (16 / 9 * 100) */
+    padding-bottom: 177.77%; 
     height: 0;
     overflow: hidden;
-    border-radius: 16px; /* Manteniamo gli angoli arrotondati */
-    background-color: #000; /* Sfondo nero mentre il video carica */
+    border-radius: 24px;
+    background-color: #000;
+    z-index: 1; /* Assicura che il video stia sopra il bagliore */
 }
 
 .demo-video {
@@ -329,11 +334,11 @@ main > section {
 }
 
 /* NUOVO: Stili specifici per il video di YouTube */
-.youtube-video { /* Assicurati che il tuo iframe in LandingPage.js abbia questa classe */
+.youtube-video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    border: 0; /* Rimuoviamo il bordo di default dell'iframe */
+    border: 0;
 }

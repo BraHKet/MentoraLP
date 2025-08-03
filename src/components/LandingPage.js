@@ -67,7 +67,7 @@ const LandingPage = () => {
                             {/* MODIFICA QUI: Assicurati che il video sia nella cartella `public` del tuo progetto */}
                             <video 
                                 className="demo-video" 
-                                src="/demo-video.mp4" 
+                                src="/video.mp4" 
                                 autoPlay 
                                 loop 
                                 muted 

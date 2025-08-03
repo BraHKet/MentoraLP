@@ -21,3 +21,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignora asset pesanti
+/public/video.mp4
+/public/fallback_image.png

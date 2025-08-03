@@ -97,12 +97,12 @@
 }
 
 .video-container {
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    background-color: #000;
     position: relative;
-    z-index: 1;
+    padding-bottom: 56.25%; /* Questo crea un aspect ratio di 16:9 (9 / 16 = 0.5625) */
+    height: 0;
+    overflow: hidden;
+    border-radius: 16px; /* Manteniamo gli angoli arrotondati */
+    background-color: #000; /* Sfondo nero mentre il video carica */
 }
 
 .demo-video {
@@ -326,4 +326,14 @@ main > section {
         margin-right: auto;
     }
 
+}
+
+/* NUOVO: Stili specifici per il video di YouTube */
+.youtube-video { /* Assicurati che il tuo iframe in LandingPage.js abbia questa classe */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0; /* Rimuoviamo il bordo di default dell'iframe */
 }

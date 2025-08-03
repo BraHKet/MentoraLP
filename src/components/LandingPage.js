@@ -47,6 +47,7 @@ const LandingPage = () => {
     // --- MODIFICA QUI I TUOI LINK ---
     const paymentLink = "https://tally.so/r/wAeeQy"; // Sostituisci con il tuo link di pagamento (es. Gumroad)
     const waitlistLink = "https://tally.so/r/n0RRaA"; // Sostituisci con il tuo link per la waitlist (es. Tally)
+    const youtubeEmbedUrl = "hhttps://youtube.com/shorts/p8Bmj1h3ITE";
 
     return (
         <div className="landing-body">
@@ -65,15 +66,14 @@ const LandingPage = () => {
                     <div className="video-wrapper">
                         <div className="video-container">
                             {/* MODIFICA QUI: Assicurati che il video sia nella cartella `public` del tuo progetto */}
-                            <video 
-                                className="demo-video" 
-                                src="/video.mp4" 
-                                autoPlay 
-                                loop 
-                                muted 
-                                playsInline
-                                poster="/fallback_image.png" 
-                            />
+                            <iframe
+                                className="youtube-video"
+                                src={youtubeEmbedUrl}
+                                title="Mentora App Demo"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
                         </div>
                     </div>
 

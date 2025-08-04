@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './LandingPage.css';
+import { landingPageEvent, purchaseButtonEvent, mailCollectEvent } from'./metaevents.js';
 
 // Componente helper per le icone SVG, per mantenere il codice JSX pulito.
 const Icon = ({ name, className }) => {
@@ -29,6 +30,7 @@ const trackEvent = (eventName, eventParams = {}) => {
 const LandingPage = () => {
     // Hook per aggiungere una classe 'visible' alle sezioni quando entrano nel viewport
     useEffect(() => {
+        landingPageEvent();
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -79,12 +81,12 @@ const LandingPage = () => {
 
                     <div className="hero-offer-box fade-in-section">
                         <a href={paymentLink} className="price-highlight" style={{ textDecoration: 'none' }} target="_blank" 
-                                rel="noopener noreferrer" onClick={() => trackEvent('begin_checkout', {
+                                rel="noopener noreferrer" onClick={() => {trackEvent('begin_checkout', {
                                 currency: 'EUR',
                                 value: 19.00,
                                 event_category: 'Conversion',
                                 event_label: 'Early Bird Lifetime Deal'
-                              })}>
+                              }); purchaseButtonEvent();}}>
                             <span className="offer-tag">Accesso 3 mesi</span>
                             <span className="old-price-hero">€90</span>
                             <span className="new-price-hero">€19</span>
@@ -105,10 +107,10 @@ const LandingPage = () => {
                     </div>
                     
                     <a href={waitlistLink} className="waitlist-link" target="_blank" 
-                        rel="noopener noreferrer" onClick={() => trackEvent('generate_lead', {
+                        rel="noopener noreferrer" onClick={() => {trackEvent('generate_lead', {
                         event_category: 'Engagement',
                         event_label: 'Waitlist Signup'
-                      })}>
+                      }); mailCollectEvent();}}>
                         Non ancora pronto? Ti avvisiamo al lancio.
                     </a>
                 </header>

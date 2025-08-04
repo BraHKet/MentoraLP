@@ -95,12 +95,12 @@ const LandingPage = () => {
                             <h3>Ottieni Accesso di 3 MESI.</h3>
                             <p>Un unico pagamento per avere Mentora per tre mesi, inclusi tutti gli aggiornamenti futuri. OFFERTA LIMITATIA AI PRIMI 100 SOSTENITORI.</p>
                             <a href={paymentLink} className="cta-button"  target="_blank" 
-                                rel="noopener noreferrer" onClick={() => trackEvent('begin_checkout', {
+                                rel="noopener noreferrer" onClick={() => {trackEvent('begin_checkout', {
                                 currency: 'EUR',
                                 value: 19.00,
                                 event_category: 'Conversion',
                                 event_label: 'Early Bird Lifetime Deal'
-                              })}>
+                              }); purchaseButtonEvent();}}>
                                 Sblocca l'Offerta a €19
                             </a>
                         </div>

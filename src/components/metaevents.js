@@ -17,7 +17,7 @@ const trackTikTokEvent = (eventName, eventParams = {}) => {
  * una pagina chiave del sito.
  */
 export const landingPageEvent = () => { 
-    trackTikTokEvent('ViewContent', {
+    trackTikTokEvent('ViewContentMentora', {
         content_type: 'product',
         content_name: 'Mentora Pre-launch Offer'
     });
@@ -29,7 +29,7 @@ export const landingPageEvent = () => {
  * Indica l'inizio del processo di acquisto.
  */
 export const purchaseButtonEvent = () => {
-    trackTikTokEvent('InitiateCheckout', {
+    trackTikTokEvent('InitiateCheckoutMentora', {
         content_type: 'product',
         quantity: 1,
         price: 19.00,
@@ -44,7 +44,7 @@ export const purchaseButtonEvent = () => {
  * È l'equivalente di un "Lead".
  */
 export const mailCollectEvent = () => {
-    trackTikTokEvent('Contact');
+    trackTikTokEvent('MailCollectMentora');
 };
 
 
@@ -55,7 +55,7 @@ export const mailCollectEvent = () => {
  * L'evento standard è "CompletePayment".
  */
 export const completePaymentEvent = () => {
-    trackTikTokEvent('CompletePayment', {
+    trackTikTokEvent('CompletePaymentMentora', {
         content_type: 'product',
         quantity: 1,
         price: 19.00,

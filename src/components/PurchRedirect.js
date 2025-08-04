@@ -7,7 +7,7 @@ const trackTikTokCompletePayment = () => {
   // Controlliamo che l'oggetto ttq di TikTok esista
   if (typeof window.ttq === 'object' && window.ttq) {
     // Usiamo l'evento standard di TikTok "CompletePayment"
-    window.ttq.track('CompletePayment', {
+    window.ttq.track('CompleteRealPaymentMentora', {
         content_type: 'product',
         quantity: 1,
         price: 19.00,

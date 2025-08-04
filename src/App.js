@@ -1,13 +1,17 @@
-// src/App.js
-
 import React from 'react';
-import LandingPage from './components/LandingPage'; // Importiamo la nostra landing page
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import ThankYou from './ThankYou'; // Assicurati che questo componente esista
+import PurchRedirect from './components/PurchRedirect';
 
 function App() {
-  // Per questa fase di validazione, l'intera applicazione è solo la LandingPage.
-  // In futuro, qui potrai usare React Router per gestire diverse pagine.
   return (
-    <LandingPage />
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/purch-red" element={<PurchRedirect />} />
+      </Routes>
+    </Router>
   );
 }
 

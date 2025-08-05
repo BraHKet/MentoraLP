@@ -80,8 +80,8 @@ const LandingPage = () => {
                     </div>
 
                     {/* FASE 1: GANCIO E SPIEGAZIONE DEL PROBLEMA */}
-                    <h2 className="hero-title">Il vero problema è non sapere se sei preparato.</h2>
-                    <p className="hero-subtitle">Anche io ho passato notti insonni a causa dell'ansia da esame. Per questo ho creato Mentora: il Tutor AI che ti organizza lo studio e ti dice finalmente se sei preparato.</p>
+                    <h2 className="hero-title">Il Tutor AI che ti fa arrivare sicuro all’esame</h2>
+                    
                     
                     {/* FASE 2: CALL TO ACTION (DECISIONE IMMEDIATA) */}
                     <div className="cta-container">

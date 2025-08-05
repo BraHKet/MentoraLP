@@ -44,42 +44,53 @@
     padding: 0 20px;
 }
 
-/* TITOLI */
-.hero-title {
-    color: var(--text-primary);
-    font-size: clamp(2.5rem, 6vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
-    text-shadow: 0 0 25px rgba(167, 139, 250, 0.5);
-}
-
-.section-title {
-    color: var(--text-primary);
-    font-size: clamp(2rem, 5vw, 2.5rem);
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
 /* SEZIONE HERO */
 .hero {
     text-align: center;
-    padding: 6rem 0;
+    padding: 4rem 0 4rem 0;
+}
+
+.hero-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.hero-logo {
+    width: clamp(40px, 8vw, 50px);
+    height: auto;
+}
+
+.hero-title-brand {
+    color: var(--text-primary);
+    font-size: clamp(2rem, 7vw, 3rem);
+    margin: 0;
+}
+
+.hero-title {
+    color: var(--text-primary);
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 25px rgba(167, 139, 250, 0.5);
 }
 
 .hero-subtitle {
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto 3rem auto;
+    font-size: 1.2rem;
+    max-width: 650px;
+    margin: 1rem auto 2.5rem auto;
+    color: var(--text-secondary);
+    line-height: 1.6;
 }
 
 .video-wrapper {
     position: relative;
-    /* NUOVO: Limitiamo la larghezza massima per un look da "telefono" */
-    max-width: 350px; /* Puoi giocare con questo valore (es. 320px, 400px) */
-    margin: 2.5rem auto;
-    border-radius: 24px; /* Un raggio più grande per un look più moderno da smartphone */
-    /* Manteniamo il bagliore per un effetto premium */
+    max-width: 350px;
+    margin: 3rem auto 0 auto; /* Aumentato margine superiore */
+    border-radius: 24px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
@@ -101,116 +112,112 @@
 
 .video-container {
     position: relative;
-    /* NUOVO: Padding per un aspect ratio di 9:16 (16 / 9 * 100) */
     padding-bottom: 177.77%; 
     height: 0;
     overflow: hidden;
     border-radius: 24px;
     background-color: #000;
-    z-index: 1; /* Assicura che il video stia sopra il bagliore */
+    z-index: 1;
 }
 
-.demo-video {
+.youtube-video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    display: block;
+    height: 100%;
+    border: 0;
 }
 
-/* OFFERTA NELL'HERO */
-.hero-offer-box {
+/* SEZIONE OFFERTA RIVISITATA */
+.hero-offer-box-revamped {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 16px;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     max-width: 650px;
-    margin: 4rem auto 0 auto;
+    margin: 2rem auto 0 auto; /* Margine aggiornato */
     display: flex;
     align-items: center;
-    gap: 2rem;
+    justify-content: space-between;
     text-align: left;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.price-highlight {
+.hero-offer-box-revamped:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(167, 139, 250, 0.5);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.offer-tag-revamped {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-primary);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.offer-text-content h3 {
+    color: var(--text-primary);
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.offer-price-button {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    color: var(--bg-color);
-    padding: 1.5rem;
-    border-radius: 12px;
+    gap: 1rem;
     flex-shrink: 0;
 }
 
-.offer-tag {
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.8;
-}
-
-.old-price-hero {
-    font-size: 1.5rem;
+.old-price-revamped {
+    font-size: 1.2rem;
     text-decoration: line-through;
-    opacity: 0.6;
+    color: var(--text-secondary);
+    opacity: 0.7;
 }
 
-.new-price-hero {
-    font-size: 3rem;
-    font-weight: 700;
-    line-height: 1;
-}
-
-.cta-content h3 {
-    color: var(--text-primary);
-    font-size: 1.5rem;
-    margin: 0 0 0.5rem 0;
-}
-
-.cta-content p {
-    margin-bottom: 1.5rem;
-}
-
-.cta-button {
+.cta-button-revamped {
     display: inline-block;
     background-image: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
     color: #030712;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 700;
     padding: 14px 28px;
-    border: none;
     border-radius: 12px;
     text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(167, 139, 250, 0.2);
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(167, 139, 250, 0.3);
+    text-align: center;
+    white-space: nowrap;
 }
 
 .waitlist-link {
     display: inline-block;
-    margin-top: 2.5rem;
+    margin-top: 1.5rem; /* Margine aggiornato */
     font-size: 0.9rem;
     color: var(--text-secondary);
     text-decoration: underline;
-    transition: color 0.2s;
+    transition: color 0.2s, transform 0.2s;
 }
 
 .waitlist-link:hover {
     color: var(--text-primary);
+    transform: translateY(-2px);
 }
 
 /* SEZIONI MAIN */
 main > section {
     padding: 6rem 0;
+    border-top: 1px solid var(--border-color);
 }
 
-.how-it-works {
-    border-top: 1px solid var(--border-color);
+.section-title {
+    color: var(--text-primary);
+    font-size: clamp(2rem, 5vw, 2.5rem);
+    text-align: center;
+    margin-bottom: 4rem;
 }
 
 .steps-grid {
@@ -218,6 +225,14 @@ main > section {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 2.5rem;
     text-align: center;
+}
+
+.step {
+    transition: transform 0.3s ease;
+}
+
+.step:hover {
+    transform: translateY(-5px);
 }
 
 .step-icon {
@@ -231,6 +246,12 @@ main > section {
     align-items: center;
     justify-content: center;
     color: var(--accent-primary);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.step:hover .step-icon {
+    box-shadow: 0 0 15px rgba(167, 139, 250, 0.5);
+    transform: scale(1.1);
 }
 
 .step h3 {
@@ -239,7 +260,6 @@ main > section {
     margin-bottom: 0.5rem;
 }
 
-/* BENEFICI */
 .benefits-list {
     list-style: none;
     padding: 0;
@@ -262,12 +282,11 @@ main > section {
 }
 
 .check-icon {
-    color: #34D399; /* Verde Smeraldo */
+    color: #34D399;
     margin-top: 4px;
     flex-shrink: 0;
 }
 
-/* FOOTER */
 .landing-footer {
     text-align: center;
     padding: 3rem 0;
@@ -275,7 +294,6 @@ main > section {
     font-size: 0.9rem;
 }
 
-/* ANIMAZIONI */
 .fade-in-section {
     opacity: 0;
     transform: translateY(30px);
@@ -287,58 +305,17 @@ main > section {
     transform: translateY(0);
 }
 
-/* NUOVI STILI PER IL BRANDING NELL'HERO */
-.hero-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem; /* Spazio tra logo e titolo */
-    margin-bottom: 1.5rem;
-}
-
-.hero-logo {
-    width: clamp(40px, 8vw, 60px); /* Dimensione del logo fluida */
-    height: auto;
-    display: block;
-}
-
 /* RESPONSIVE */
-@media (max-width: 650px) {
-    .hero-offer-box {
+@media (max-width: 600px) {
+    .hero-offer-box-revamped {
         flex-direction: column;
         text-align: center;
+        gap: 1.5rem;
         padding: 1.5rem;
     }
-}
 
-@media (min-width: 768px) {
-    
-    .video-wrapper {
-        max-width: 350px;
-        
-        margin-left: auto;
-        margin-right: auto;
+    .offer-price-button {
+        width: 100%;
+        justify-content: center;
     }
-
-}
-
-@media (max-width: 768px) {
-    
-    .video-wrapper {
-        max-width: 300px;
-        
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-}
-
-/* NUOVO: Stili specifici per il video di YouTube */
-.youtube-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
 }

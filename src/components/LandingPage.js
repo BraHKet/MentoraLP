@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './LandingPage.css';
 import { landingPageEvent, purchaseButtonEvent, mailCollectEvent } from'./metaevents.js';
 
-// Componente helper per le icone SVG, per mantenere il codice JSX pulito.
+// Componente helper per le icone SVG
 const Icon = ({ name, className }) => {
     const iconPaths = {
         upload: <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" x2="12" y1="3" y2="15" /></>,
@@ -10,9 +10,8 @@ const Icon = ({ name, className }) => {
         calendar: <><rect width="18" height="18" x="3" y="4" rx="2" ry="2" /><line x1="16" x2="16" y1="2" y2="6" /><line x1="8" x2="8" y1="2" y2="6" /><line x1="3" x2="21" y1="10" y2="10" /></>,
         check: <path d="M20 6 9 17l-5-5" />,
     };
-
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
             {iconPaths[name]}
         </svg>
     );
@@ -28,14 +27,14 @@ const trackEvent = (eventName, eventParams = {}) => {
 };
 
 const LandingPage = () => {
-    // Hook per aggiungere una classe 'visible' alle sezioni quando entrano nel viewport
     useEffect(() => {
-        landingPageEvent();
+        landingPageEvent(); // Evento Meta Pixel per PageView
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Opzionale: smette di osservare dopo la prima volta
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
@@ -46,73 +45,73 @@ const LandingPage = () => {
         return () => sections.forEach(section => observer.unobserve(section));
     }, []);
 
-    // --- MODIFICA QUI I TUOI LINK ---
-    const paymentLink = "https://tally.so/r/wAeeQy"; // Sostituisci con il tuo link di pagamento (es. Gumroad)
-    const waitlistLink = "https://tally.so/r/n0RRaA"; // Sostituisci con il tuo link per la waitlist (es. Tally)
-    const youtubeEmbedUrl = "https://www.youtube.com/embed/sAFrU6_mOWs?autoplay=1&mute=1&rel=0&modestbranding=1&controls=1";
+    const paymentLink = "https://tally.so/r/wAeeQy";
+    const waitlistLink = "https://tally.so/r/n0RRaA";
+    const youtubeEmbedUrl = "https://www.youtube.com/embed/sAFrU6_mOWs?autoplay=1&mute=1&rel=0&controls=1&showinfo=0&modestbranding=1";
+
+    const handleOfferClick = () => {
+        trackEvent('begin_checkout', {
+            currency: 'EUR',
+            value: 19.00,
+            event_category: 'Conversion',
+            event_label: 'Early Bird 3 Mesi'
+        });
+        purchaseButtonEvent();
+        window.open(paymentLink, '_blank', 'noopener,noreferrer');
+    };
+
+    const handleWaitlistClick = (e) => {
+        // e.stopPropagation() è stato rimosso perché il link non è più dentro un altro elemento cliccabile
+        trackEvent('generate_lead', {
+            event_category: 'Engagement',
+            event_label: 'Waitlist Signup'
+        });
+        mailCollectEvent();
+        window.open(waitlistLink, '_blank', 'noopener,noreferrer');
+    };
 
     return (
         <div className="landing-body">
             <div className="background-glow"></div>
             <div className="landing-container">
-                
                 <header className="hero">
-
                     <div className="hero-brand">
                         <img src="/logo.png" alt="Mentora Logo" className="hero-logo" />
+                        
                     </div>
 
-                    <h1 className="hero-title">Dall'ansia da esame alla certezza di essere preparato.</h1>
-                    <p className="hero-subtitle">Mentora analizza i tuoi PDF, crea un piano di studi intelligente e ti interroga come un vero professore, per darti la sicurezza che ti serve per l'esame.</p>
+                    <h2 className="hero-title">L'ansia da esame ti blocca? L'ho risolta così.</h2>
+                    <p className="hero-subtitle">Sono uno studente di Ingegneria e ho creato il Tutor AI che avrei sempre voluto: analizza i tuoi PDF, ti crea un piano e ti interroga dandoti un voto da 1 a 30.</p>
                     
+                    {/* L'OFFERTA ORA È PRIMA DEL VIDEO */}
+                    <div className="hero-offer-box-revamped" onClick={handleOfferClick}>
+                        <div className="offer-text-content">
+                            <span className="offer-tag-revamped">🔥 Offerta Pre-Lancio (solo per i primi 100)</span>
+                            <h3>Ottieni 3 Mesi di Accesso a Mentora</h3>
+                        </div>
+                        <div className="offer-price-button">
+                            <span className="old-price-revamped">€90</span>
+                            <span className="cta-button-revamped">Sblocca Ora a soli €19</span>
+                        </div>
+                    </div>
+                    
+                    <a href={waitlistLink} className="waitlist-link" onClick={handleWaitlistClick}>
+                        Non ancora pronto? Ti avvisiamo al lancio.
+                    </a>
+
+                    {/* IL VIDEO ORA È DOPO L'OFFERTA */}
                     <div className="video-wrapper">
                         <div className="video-container">
-                            {/* MODIFICA QUI: Assicurati che il video sia nella cartella `public` del tuo progetto */}
                             <iframe
                                 className="youtube-video"
                                 src={youtubeEmbedUrl}
                                 title="Mentora App Demo"
                                 frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowFullScreen
                             ></iframe>
                         </div>
                     </div>
-
-                    <div className="hero-offer-box fade-in-section">
-                        <a href={paymentLink} className="price-highlight" style={{ textDecoration: 'none' }} target="_blank" 
-                                rel="noopener noreferrer" onClick={() => {trackEvent('begin_checkout', {
-                                currency: 'EUR',
-                                value: 19.00,
-                                event_category: 'Conversion',
-                                event_label: 'Early Bird Lifetime Deal'
-                              }); purchaseButtonEvent();}}>
-                            <span className="offer-tag">Accesso 3 mesi</span>
-                            <span className="old-price-hero">€90</span>
-                            <span className="new-price-hero">€19</span>
-                        </a>
-                        <div className="cta-content">
-                            <h3>Ottieni Accesso di 3 MESI.</h3>
-                            <p>Un unico pagamento per avere Mentora per tre mesi, inclusi tutti gli aggiornamenti futuri. OFFERTA LIMITATIA AI PRIMI 100 SOSTENITORI.</p>
-                            <a href={paymentLink} className="cta-button"  target="_blank" 
-                                rel="noopener noreferrer" onClick={() => {trackEvent('begin_checkout', {
-                                currency: 'EUR',
-                                value: 19.00,
-                                event_category: 'Conversion',
-                                event_label: 'Early Bird Lifetime Deal'
-                              }); purchaseButtonEvent();}}>
-                                Sblocca l'Offerta a €19
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <a href={waitlistLink} className="waitlist-link" target="_blank" 
-                        rel="noopener noreferrer" onClick={() => {trackEvent('generate_lead', {
-                        event_category: 'Engagement',
-                        event_label: 'Waitlist Signup'
-                      }); mailCollectEvent();}}>
-                        Non ancora pronto? Ti avvisiamo al lancio.
-                    </a>
                 </header>
 
                 <main>
@@ -122,12 +121,12 @@ const LandingPage = () => {
                             <div className="step">
                                 <div className="step-icon"><Icon name="upload" /></div>
                                 <h3>1. Carica i PDF</h3>
-                                <p>Dì addio al caos. Unisci il PDF principale, appunti e slide in un unico posto.</p>
+                                <p>Unisci il PDF del corso, appunti e slide in un unico posto per dire addio al caos.</p>
                             </div>
                             <div className="step">
                                 <div className="step-icon"><Icon name="calendar" /></div>
                                 <h3>2. Ricevi il Piano</h3>
-                                <p>Mentora genera un piano di studi giornaliero e ottimizzato. Zero tempo perso.</p>
+                                <p>L'AI genera un piano di studi giornaliero e ottimizzato per non farti perdere tempo.</p>
                             </div>
                             <div className="step">
                                 <div className="step-icon"><Icon name="brain" /></div>
@@ -140,10 +139,10 @@ const LandingPage = () => {
                     <section className="benefits fade-in-section">
                         <h2 className="section-title">Basta sentirsi impreparati.</h2>
                         <ul className="benefits-list">
-                            <li><Icon name="check" className="check-icon" /><div><strong>Acquisisci vera sicurezza.</strong> Fatti interrogare da un'AI che ti chiede dimostrazioni, non ti dà suggerimenti e ti permette di disegnare formule, proprio come a un esame.</div></li>
-                            <li><Icon name="check" className="check-icon" /><div><strong>Dì addio al caos.</strong> Tutti i tuoi materiali sono organizzati e collegati per argomento. Niente più file sparsi e tempo perso a cercare.</div></li>
-                            <li><Icon name="check" className="check-icon" /><div><strong>Chiarimenti istantanei, senza attrito.</strong> Non capisci un passaggio? Selezionalo e avvia una conversazione con l'AI, che verrà salvata per non farti dimenticare nulla.</div></li>
-                            <li><Icon name="check" className="check-icon" /><div><strong>Ricevi feedback oggettivo.</strong> Ottieni una valutazione finale onesta su chiarezza, sicurezza e completezza della tua esposizione. Scopri davvero cosa sai.</div></li>
+                            <li><Icon name="check" className="check-icon" /><div><strong>Acquisisci vera sicurezza.</strong> Fatti interrogare da un'AI che ti chiede dimostrazioni e ti permette di scrivere formule, proprio come a un esame.</div></li>
+                            <li><Icon name="check" className="check-icon" /><div><strong>Dì addio al caos.</strong> Tutti i tuoi materiali sono organizzati e collegati per argomento. Niente più file sparsi a farti perdere tempo.</div></li>
+                            <li><Icon name="check" className="check-icon" /><div><strong>Chiarimenti istantanei, senza attrito.</strong> Non capisci un passaggio? Avvia una conversazione con l'AI direttamente dall'app, senza cambiare contesto.</div></li>
+                            <li><Icon name="check" className="check-icon" /><div><strong>Ricevi feedback oggettivo.</strong> Ottieni una valutazione finale onesta sulla tua esposizione per capire davvero cosa sai e dove migliorare.</div></li>
                         </ul>
                     </section>
                 </main>

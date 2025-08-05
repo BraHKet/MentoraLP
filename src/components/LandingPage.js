@@ -81,7 +81,7 @@ const LandingPage = () => {
                     </div>
 
                     <h2 className="hero-title">L'ansia da esame ti blocca? L'ho risolta così.</h2>
-                    <p className="hero-subtitle">Sono uno studente di Ingegneria e ho creato il Tutor AI che avrei sempre voluto: analizza i tuoi PDF, ti crea un piano e ti interroga dandoti un voto da 1 a 30.</p>
+                    <p className="hero-subtitle">Sono uno studente di Fisica e ho creato il Tutor AI che avrei sempre voluto: analizza i tuoi PDF, ti crea un piano e ti interroga dandoti un voto da 1 a 30.</p>
                     
                     {/* L'OFFERTA ORA È PRIMA DEL VIDEO */}
                     <div className="hero-offer-box-revamped" onClick={handleOfferClick}>

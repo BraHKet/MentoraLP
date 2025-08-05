@@ -50,7 +50,7 @@ const LandingPage = () => {
     const youtubeEmbedUrl = "https://www.youtube.com/embed/sAFrU6_mOWs?autoplay=1&mute=1&rel=0&controls=1&showinfo=0&modestbranding=1";
 
     const handleOfferClick = () => {
-        trackEvent('begin_checkout', {
+        trackEvent('offerta-click', {
             currency: 'EUR',
             value: 19.00,
             event_category: 'Conversion',
@@ -62,7 +62,7 @@ const LandingPage = () => {
 
     const handleWaitlistClick = (e) => {
         // e.stopPropagation() è stato rimosso perché il link non è più dentro un altro elemento cliccabile
-        trackEvent('generate_lead', {
+        trackEvent('mailCollector-click', {
             event_category: 'Engagement',
             event_label: 'Waitlist Signup'
         });

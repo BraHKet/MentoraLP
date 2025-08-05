@@ -28,7 +28,7 @@ const trackEvent = (eventName, eventParams = {}) => {
 
 const LandingPage = () => {
     useEffect(() => {
-        landingPageEvent(); // Evento Meta Pixel per PageView
+        landingPageEvent();
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -50,7 +50,7 @@ const LandingPage = () => {
     const youtubeEmbedUrl = "https://www.youtube.com/embed/sAFrU6_mOWs?autoplay=1&mute=1&rel=0&controls=1&showinfo=0&modestbranding=1";
 
     const handleOfferClick = () => {
-        trackEvent('offerta-click', {
+        trackEvent('Offerta-click', {
             currency: 'EUR',
             value: 19.00,
             event_category: 'Conversion',
@@ -61,8 +61,7 @@ const LandingPage = () => {
     };
 
     const handleWaitlistClick = (e) => {
-        // e.stopPropagation() è stato rimosso perché il link non è più dentro un altro elemento cliccabile
-        trackEvent('mailCollector-click', {
+        trackEvent('mailCollection-click', {
             event_category: 'Engagement',
             event_label: 'Waitlist Signup'
         });
@@ -77,14 +76,29 @@ const LandingPage = () => {
                 <header className="hero">
                     <div className="hero-brand">
                         <img src="/logo.png" alt="Mentora Logo" className="hero-logo" />
-                        
+                        <h1 className="hero-title-brand">Mentora</h1>
                     </div>
 
-                    <h2 className="hero-title">L'ansia da esame ti blocca? L'ho risolta così.</h2>
-                    <p className="hero-subtitle">Sono uno studente di Fisica e ho creato il Tutor AI che avrei sempre voluto: analizza i tuoi PDF, ti crea un piano e ti interroga dandoti un voto da 1 a 30.</p>
+                    {/* FASE 1: GANCIO E SPIEGAZIONE DEL PROBLEMA */}
+                    <h2 className="hero-title">Il vero problema è non sapere se sei preparato.</h2>
+                    <p className="hero-subtitle">Anche io ho passato notti insonni a causa dell'ansia da esame. Per questo ho creato Mentora: il Tutor AI che ti organizza lo studio e ti dice finalmente se sei preparato. **Guarda come funziona:**</p>
                     
-                    {/* L'OFFERTA ORA È PRIMA DEL VIDEO */}
-                    <div className="hero-offer-box-revamped" onClick={handleOfferClick}>
+                    {/* FASE 2: DIMOSTRAZIONE DEL VALORE (IL VIDEO) */}
+                    <div className="video-wrapper">
+                        <div className="video-container">
+                            <iframe
+                                className="youtube-video"
+                                src={youtubeEmbedUrl}
+                                title="Mentora App Demo"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                    </div>
+
+                    {/* FASE 3: OFFERTA (DOPO AVER DIMOSTRATO IL VALORE) */}
+                    <div id="offer-section" className="hero-offer-box-revamped fade-in-section" onClick={handleOfferClick}>
                         <div className="offer-text-content">
                             <span className="offer-tag-revamped">🔥 Offerta Pre-Lancio (solo per i primi 100)</span>
                             <h3>Ottieni 3 Mesi di Accesso a Mentora</h3>
@@ -98,20 +112,6 @@ const LandingPage = () => {
                     <a href={waitlistLink} className="waitlist-link" onClick={handleWaitlistClick}>
                         Non ancora pronto? Ti avvisiamo al lancio.
                     </a>
-
-                    {/* IL VIDEO ORA È DOPO L'OFFERTA */}
-                    <div className="video-wrapper">
-                        <div className="video-container">
-                            <iframe
-                                className="youtube-video"
-                                src={youtubeEmbedUrl}
-                                title="Mentora App Demo"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                            ></iframe>
-                        </div>
-                    </div>
                 </header>
 
                 <main>

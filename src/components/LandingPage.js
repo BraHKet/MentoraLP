@@ -81,9 +81,30 @@ const LandingPage = () => {
 
                     {/* FASE 1: GANCIO E SPIEGAZIONE DEL PROBLEMA */}
                     <h2 className="hero-title">Il vero problema è non sapere se sei preparato.</h2>
-                    <p className="hero-subtitle">Anche io ho passato notti insonni a causa dell'ansia da esame. Per questo ho creato Mentora: il Tutor AI che ti organizza lo studio e ti dice finalmente se sei preparato. **Guarda come funziona:**</p>
+                    <p className="hero-subtitle">Anche io ho passato notti insonni a causa dell'ansia da esame. Per questo ho creato Mentora: il Tutor AI che ti organizza lo studio e ti dice finalmente se sei preparato.</p>
                     
-                    {/* FASE 2: DIMOSTRAZIONE DEL VALORE (IL VIDEO) */}
+                    {/* FASE 2: CALL TO ACTION (DECISIONE IMMEDIATA) */}
+                    <div className="cta-container">
+                        {/* CTA PRIMARIA */}
+                        <div id="offer-section" className="hero-offer-box-revamped" onClick={handleOfferClick}>
+                            <div className="offer-text-content">
+                                <span className="offer-tag-revamped">🔥 Offerta Pre-Lancio (solo per i primi 100)</span>
+                                <h3>Ottieni 3 Mesi di Accesso a Mentora</h3>
+                            </div>
+                            <div className="offer-price-button">
+                                <span className="old-price-revamped">€90</span>
+                                <span className="cta-button-revamped">Sblocca Ora a soli €19</span>
+                            </div>
+                        </div>
+                        
+                        {/* CTA SECONDARIA */}
+                        <button className="waitlist-button" onClick={handleWaitlistClick}>
+                            Non ancora pronto? Ti avvisiamo noi al lancio.
+                        </button>
+                    </div>
+
+                    {/* FASE 3: DIMOSTRAZIONE DEL VALORE (IL VIDEO) */}
+                    <p className="video-intro-text">Guarda come funziona:</p>
                     <div className="video-wrapper">
                         <div className="video-container">
                             <iframe
@@ -96,22 +117,6 @@ const LandingPage = () => {
                             ></iframe>
                         </div>
                     </div>
-
-                    {/* FASE 3: OFFERTA (DOPO AVER DIMOSTRATO IL VALORE) */}
-                    <div id="offer-section" className="hero-offer-box-revamped fade-in-section" onClick={handleOfferClick}>
-                        <div className="offer-text-content">
-                            <span className="offer-tag-revamped">🔥 Offerta Pre-Lancio (solo per i primi 100)</span>
-                            <h3>Ottieni 3 Mesi di Accesso a Mentora</h3>
-                        </div>
-                        <div className="offer-price-button">
-                            <span className="old-price-revamped">€90</span>
-                            <span className="cta-button-revamped">Sblocca Ora a soli €19</span>
-                        </div>
-                    </div>
-                    
-                    <a href={waitlistLink} className="waitlist-link" onClick={handleWaitlistClick}>
-                        Non ancora pronto? Ti avvisiamo al lancio.
-                    </a>
                 </header>
 
                 <main>

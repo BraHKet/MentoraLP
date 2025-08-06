@@ -11,7 +11,7 @@ const chatScript = [
     { sender: 'user', type: 'text', content: 'Certo. Il principio afferma che la forza.....' },
     { sender: 'ai', type: 'text', content: 'Enunciazione corretta. Adesso mi scriva la formula e mi disegni un diagramma di corpo libero per un oggetto che scivola su un piano inclinato.' },
     { sender: 'user', type: 'text', content: 'Subito. Ecco la formula e il disegno:' },
-    { sender: 'user', type: 'image', content: '/meme.png' }, // Ho rimesso il percorso corretto per l'immagine
+    { sender: 'user', type: 'image', content: '/meme.jpg' }, // Ho rimesso il percorso corretto per l'immagine
     { sender: 'ai', type: 'text', content: 'Perfetto. Il diagramma mostra correttamente la forza peso... Passiamo al prossimo argomento. ' },
 ];
 

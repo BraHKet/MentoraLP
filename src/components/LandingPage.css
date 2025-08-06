@@ -94,7 +94,7 @@ html { scroll-behavior: smooth; }
 /* SCENA CHAT CON PERSONAGGI */
 .chat-scene-container { position: relative; max-width: 700px; margin: 0 auto; width: 100%; }
 .characters-container { display: flex; justify-content: space-between; align-items: flex-end; padding: 0; margin-top: -60px; pointer-events: none; }
-.scene-character { max-height: clamp(100px, 30vw, 160px); width: auto; pointer-events: all; padding-top: 50px; }
+.scene-character { max-height: clamp(100px, 30vw, 160px); width: auto; pointer-events: all;}
 
 /* CONTENITORE CTA */
 .cta-container { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; max-width: 650px; margin: 0 auto; }

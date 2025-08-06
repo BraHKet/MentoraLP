@@ -70,25 +70,17 @@ const LandingPage = () => {
         <div className="landing-body">
             <div className="background-glow"></div>
             <div className="landing-container">
-                <header className="hero">
+                
+
+                <main>
+                    
+                    {/* Atto 2: Il Problema */}
+                    <section className="friend-scenario-section fade-in-section">
+                        <header className="hero">
                     <div className="hero-brand">
                         <img src="/logo.png" alt="Mentora Logo" className="hero-logo" />
                     </div>
                 </header>
-
-                <main>
-                    {/* Atto 1: Il Gancio */}
-                    <section className="meme-section">
-                        <img src="/meme.jpg" alt="Meme Mentora vs Ansia da esame" className="meme-image" />
-                    </section>
-
-                    {/* --- FRECCIA 1 --- */}
-                    <div className="arrow-divider">
-                        <ArrowIcon />
-                    </div>
-
-                    {/* Atto 2: Il Problema */}
-                    <section className="friend-scenario-section fade-in-section">
                         <h2 className="section-title">Studiare con un amico a volte non basta...</h2>
                         <div className="scenario-scene">
                             <div className="character-group">

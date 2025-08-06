@@ -1,0 +1,84 @@
+/* File: ChatSimulation.css */
+
+.chat-simulation-container {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.chat-window {
+    height: 450px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-right: 10px;
+}
+
+.chat-window::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-window::-webkit-scrollbar-track {
+    background: transparent;
+}
+.chat-window::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.message-bubble {
+    padding: 12px 18px;
+    border-radius: 20px;
+    max-width: 80%;
+    line-height: 1.5;
+    animation: fadeIn 0.5s ease-in-out;
+    word-wrap: break-word;
+}
+
+.ai-message {
+    background-color: #2c2f3b;
+    color: var(--text-primary);
+    border-bottom-left-radius: 5px;
+    align-self: flex-start;
+}
+
+.user-message {
+    background-image: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    color: var(--bg-color);
+    font-weight: 500;
+    border-bottom-right-radius: 5px;
+    align-self: flex-end;
+}
+
+/* --- NUOVI STILI PER LE IMMAGINI --- */
+
+/* Contenitore della bolla-immagine: rimuoviamo padding e sfondo */
+.message-bubble.image-container {
+    padding: 0;
+    background: none;
+    max-width: 60%; /* Diamo una dimensione massima al disegno */
+}
+
+/* L'immagine stessa */
+.message-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px; /* Bordi arrotondati per l'immagine */
+    border: 2px solid var(--accent-secondary); /* Un bordo per farla risaltare */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

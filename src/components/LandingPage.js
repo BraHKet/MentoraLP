@@ -1,6 +1,16 @@
+// File: LandingPage.js (aggiornato)
+
 import React, { useEffect } from 'react';
 import './LandingPage.css';
-import { landingPageEvent, purchaseButtonEvent, mailCollectEvent } from'./metaevents.js';
+import { landingPageEvent, purchaseButtonEvent, mailCollectEvent } from './metaevents.js';
+import ChatSimulation from './ChatSimulation';
+
+// --- NUOVO COMPONENTE FRECCIA ---
+const ArrowIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="arrow-icon">
+        <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+);
 
 // Componente helper per le icone SVG
 const Icon = ({ name, className }) => {
@@ -17,19 +27,17 @@ const Icon = ({ name, className }) => {
     );
 };
 
-// Funzione helper per tracciare gli eventi in Google Analytics
 const trackEvent = (eventName, eventParams = {}) => {
-  if (typeof window.gtag === 'function') {
-    window.gtag('event', eventName, eventParams);
-  } else {
-    console.warn('Google Analytics gtag function not found.');
-  }
+    if (typeof window.gtag === 'function') {
+        window.gtag('event', eventName, eventParams);
+    } else {
+        console.warn('Google Analytics gtag function not found.');
+    }
 };
 
 const LandingPage = () => {
     useEffect(() => {
         landingPageEvent();
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -38,33 +46,22 @@ const LandingPage = () => {
                 }
             });
         }, { threshold: 0.1 });
-
         const sections = document.querySelectorAll('.fade-in-section');
         sections.forEach(section => observer.observe(section));
-
         return () => sections.forEach(section => observer.unobserve(section));
     }, []);
 
     const paymentLink = "https://tally.so/r/wAeeQy";
     const waitlistLink = "https://tally.so/r/n0RRaA";
-    const youtubeEmbedUrl = "https://www.youtube.com/embed/sAFrU6_mOWs?autoplay=1&mute=1&rel=0&controls=1&showinfo=0&modestbranding=1";
 
     const handleOfferClick = () => {
-        trackEvent('Offerta-click', {
-            currency: 'EUR',
-            value: 19.00,
-            event_category: 'Conversion',
-            event_label: 'Early Bird 3 Mesi'
-        });
+        trackEvent('Offerta-click', { currency: 'EUR', value: 19.00, event_category: 'Conversion', event_label: 'Early Bird 3 Mesi' });
         purchaseButtonEvent();
         window.open(paymentLink, '_blank', 'noopener,noreferrer');
     };
 
     const handleWaitlistClick = (e) => {
-        trackEvent('mailCollection-click', {
-            event_category: 'Engagement',
-            event_label: 'Waitlist Signup'
-        });
+        trackEvent('mailCollection-click', { event_category: 'Engagement', event_label: 'Waitlist Signup' });
         mailCollectEvent();
         window.open(waitlistLink, '_blank', 'noopener,noreferrer');
     };
@@ -76,17 +73,59 @@ const LandingPage = () => {
                 <header className="hero">
                     <div className="hero-brand">
                         <img src="/logo.png" alt="Mentora Logo" className="hero-logo" />
-                        <h1 className="hero-title-brand">Mentora</h1>
+                    </div>
+                </header>
+
+                <main>
+                    {/* Atto 1: Il Gancio */}
+                    <section className="meme-section">
+                        <img src="/meme.jpg" alt="Meme Mentora vs Ansia da esame" className="meme-image" />
+                    </section>
+
+                    {/* --- FRECCIA 1 --- */}
+                    <div className="arrow-divider">
+                        <ArrowIcon />
                     </div>
 
-                    {/* FASE 1: GANCIO E SPIEGAZIONE DEL PROBLEMA */}
-                    <h2 className="hero-title">Il Tutor AI che ti fa arrivare sicuro all’esame</h2>
+                    {/* Atto 2: Il Problema */}
+                    <section className="friend-scenario-section fade-in-section">
+                        <h2 className="section-title">Studiare con un amico a volte non basta...</h2>
+                        <div className="scenario-scene">
+                            <div className="character-group">
+                                <div className="speech-bubble friend-bubble">
+                                    Uhm... allora, parlami di quella... cosa... la termodinamica?
+                                </div>
+                                <img src="/omino1.png" alt="Amico che interroga" className="character-image" />
+                            </div>
+                            <div className="character-group">
+                                <div className="speech-bubble user-bubble-static">
+                                    <em>(Non sa neanche cosa chiedere...)</em>
+                                </div>
+                                <img src="/robot.png" alt="Utente che viene interrogato" className="character-image" />
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* --- FRECCIA 2 --- */}
+                    <div className="arrow-divider">
+                        <ArrowIcon />
+                    </div>
+
+                    {/* Atto 3: La Soluzione */}
+                    <section className="ai-scenario-section fade-in-section">
+                        <h2 className="section-title">Ecco come ti prepara un vero esperto.</h2>
+                        <div className="chat-scene-container">
+                            <ChatSimulation />
+                            <div className="characters-container">
+                                <img src="/robot.png" alt="Tutor AI che saluta" className="scene-character robot-character" />
+                                <img src="/omino1.png" alt="Studente che risponde" className="scene-character student-character" />
+                            </div>
+                        </div>
+                    </section>
                     
-                    
-                    {/* FASE 2: CALL TO ACTION (DECISIONE IMMEDIATA) */}
-                    <div className="cta-container">
-                        {/* CTA PRIMARIA */}
-                        <div id="offer-section" className="hero-offer-box-revamped" onClick={handleOfferClick}>
+                    {/* Atto 4: La Call to Action */}
+                    <div id="offer-section" className="cta-container fade-in-section">
+                        <div className="hero-offer-box-revamped" onClick={handleOfferClick}>
                             <div className="offer-text-content">
                                 <span className="offer-tag-revamped">🔥 Offerta Pre-Lancio (solo per i primi 100)</span>
                                 <h3>Ottieni 3 Mesi di Accesso a Mentora</h3>
@@ -96,59 +135,18 @@ const LandingPage = () => {
                                 <span className="cta-button-revamped">Sblocca Ora a soli €19</span>
                             </div>
                         </div>
-                        
-                        {/* CTA SECONDARIA */}
                         <button className="waitlist-button" onClick={handleWaitlistClick}>
                             Non ancora pronto? Ti avvisiamo noi al lancio.
                         </button>
                     </div>
 
-                    {/* FASE 3: DIMOSTRAZIONE DEL VALORE (IL VIDEO) */}
-                    <p className="video-intro-text">Guarda come funziona:</p>
-                    <div className="video-wrapper">
-                        <div className="video-container">
-                            <iframe
-                                className="youtube-video"
-                                src={youtubeEmbedUrl}
-                                title="Mentora App Demo"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen
-                            ></iframe>
-                        </div>
-                    </div>
-                </header>
-
-                <main>
                     <section className="how-it-works fade-in-section">
                         <h2 className="section-title">Il tuo flusso di studio, finalmente preciso.</h2>
                         <div className="steps-grid">
-                            <div className="step">
-                                <div className="step-icon"><Icon name="upload" /></div>
-                                <h3>1. Carica i PDF</h3>
-                                <p>Unisci il PDF del corso, appunti e slide in un unico posto per dire addio al caos.</p>
-                            </div>
-                            <div className="step">
-                                <div className="step-icon"><Icon name="calendar" /></div>
-                                <h3>2. Ricevi il Piano</h3>
-                                <p>L'AI genera un piano di studi giornaliero e ottimizzato per non farti perdere tempo.</p>
-                            </div>
-                            <div className="step">
-                                <div className="step-icon"><Icon name="brain" /></div>
-                                <h3>3. Fatti Interrogare</h3>
-                                <p>Mettiti alla prova con un'AI che simula un esame reale e valuta la tua preparazione.</p>
-                            </div>
+                            <div className="step"><div className="step-icon"><Icon name="upload" /></div><h3>1. Carica i PDF</h3><p>Unisci il PDF del corso, appunti e slide in un unico posto per dire addio al caos.</p></div>
+                            <div className="step"><div className="step-icon"><Icon name="calendar" /></div><h3>2. Ricevi il Piano</h3><p>L'AI genera un piano di studi giornaliero e ottimizzato per non farti perdere tempo.</p></div>
+                            <div className="step"><div className="step-icon"><Icon name="brain" /></div><h3>3. Fatti Interrogare</h3><p>Mettiti alla prova con un'AI che simula un esame reale e valuta la tua preparazione.</p></div>
                         </div>
-                    </section>
-
-                    <section className="benefits fade-in-section">
-                        <h2 className="section-title">Basta sentirsi impreparati.</h2>
-                        <ul className="benefits-list">
-                            <li><Icon name="check" className="check-icon" /><div><strong>Acquisisci vera sicurezza.</strong> Fatti interrogare da un'AI che ti chiede dimostrazioni e ti permette di scrivere formule, proprio come a un esame.</div></li>
-                            <li><Icon name="check" className="check-icon" /><div><strong>Dì addio al caos.</strong> Tutti i tuoi materiali sono organizzati e collegati per argomento. Niente più file sparsi a farti perdere tempo.</div></li>
-                            <li><Icon name="check" className="check-icon" /><div><strong>Chiarimenti istantanei, senza attrito.</strong> Non capisci un passaggio? Avvia una conversazione con l'AI direttamente dall'app, senza cambiare contesto.</div></li>
-                            <li><Icon name="check" className="check-icon" /><div><strong>Ricevi feedback oggettivo.</strong> Ottieni una valutazione finale onesta sulla tua esposizione per capire davvero cosa sai e dove migliorare.</div></li>
-                        </ul>
                     </section>
                 </main>
 

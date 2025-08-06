@@ -1,26 +1,11 @@
-// File: LandingPage.js (aggiornato)
+// File: LandingPage.js (aggiornato e ottimizzato)
 
 import React, { useEffect } from 'react';
 import './LandingPage.css';
 import { landingPageEvent, purchaseButtonEvent, mailCollectEvent } from './metaevents.js';
 import ChatSimulation from './ChatSimulation';
 
-// --- COMPONENTE FRECCIA RIUTILIZZABILE ---
-const ScrollArrow = ({ targetId }) => {
-    const handleClick = () => {
-        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-    };
-
-    return (
-        <div className="scroll-arrow-container" onClick={handleClick}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="arrow-icon">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
-        </div>
-    );
-};
-
-// Componente icone standard
+// Componente helper per le icone SVG
 const Icon = ({ name, className }) => {
     const iconPaths = {
         upload: <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" x2="12" y1="3" y2="15" /></>,
@@ -37,26 +22,7 @@ const Icon = ({ name, className }) => {
 
 const LandingPage = () => {
     useEffect(() => {
-        const handleKeyDown = (e) => {
-            const sections = Array.from(document.getElementsByClassName('full-page-section'));
-            if (sections.length === 0) return;
-            const currentSectionIndex = sections.findIndex(section => {
-                const rect = section.getBoundingClientRect();
-                return rect.top >= 0 && rect.top < window.innerHeight / 2;
-            });
-            if (currentSectionIndex === -1) return;
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                const nextSection = sections[currentSectionIndex + 1];
-                if (nextSection) nextSection.scrollIntoView({ behavior: 'smooth' });
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                const prevSection = sections[currentSectionIndex - 1];
-                if (prevSection) prevSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
+        // Logica per animazioni su scroll, se presente
     }, []);
 
     const paymentLink = "https://tally.so/r/wAeeQy";
@@ -68,19 +34,14 @@ const LandingPage = () => {
     return (
         <div className="landing-body">
             <div className="background-glow"></div>
-            <main className="sections-container">
-                {/* Sezione 1: Hero con Logo e Titolo */}
-                <section id="hero-section" className="full-page-section">
-                    <div className="content-wrapper">
-                        <img src="/logo.png" alt="Mentora Logo" className="hero-logo" />
-                        <h1 className="main-title">Il Tutor AI che ti fa arrivare sicuro all'esame.</h1>
-                    </div>
-                    <ScrollArrow targetId="scena-amico" />
-                </section>
+            <div className="landing-container">
+                <header className="hero">
+                    <img src="/logo.png" alt="Mentora Logo" className="hero-logo" />
+                </header>
 
-                {/* Sezione 2: Il Problema */}
-                <section id="scena-amico" className="full-page-section">
-                    <div className="content-wrapper">
+                <main>
+                    {/* Sezione 1: Il Problema */}
+                    <section className="page-section">
                         <h2 className="section-title">Studiare con un amico a volte non basta...</h2>
                         <div className="scenario-scene">
                             <div className="character-group">
@@ -92,13 +53,10 @@ const LandingPage = () => {
                                 <img src="/robot.png" alt="Utente che viene interrogato" className="character-image" />
                             </div>
                         </div>
-                    </div>
-                    <ScrollArrow targetId="scena-ai" />
-                </section>
-                
-                {/* Sezione 3: La Soluzione */}
-                <section id="scena-ai" className="full-page-section">
-                     <div className="content-wrapper">
+                    </section>
+
+                    {/* Sezione 2: La Soluzione */}
+                    <section className="page-section">
                         <h2 className="section-title">Ecco come ti prepara un vero esperto.</h2>
                         <div className="chat-scene-container">
                             <ChatSimulation />
@@ -107,15 +65,12 @@ const LandingPage = () => {
                                 <img src="/omino1.png" alt="Studente" className="scene-character student-character" />
                             </div>
                         </div>
-                    </div>
-                    <ScrollArrow targetId="offerta" />
-                </section>
-
-                {/* Sezione 4: Offerta */}
-                <section id="offerta" className="full-page-section">
-                    <div className="content-wrapper">
+                    </section>
+                    
+                    {/* Sezione 3: La Call to Action */}
+                    <section className="page-section">
                         <div id="offer-section" className="cta-container">
-                             <div className="hero-offer-box-revamped" onClick={handleOfferClick}>
+                            <div className="hero-offer-box-revamped" onClick={handleOfferClick}>
                                 <div className="offer-text-content">
                                     <span className="offer-tag-revamped">🔥 Offerta Pre-Lancio (solo per i primi 100)</span>
                                     <h3>Ottieni 3 Mesi di Accesso a Mentora</h3>
@@ -129,28 +84,23 @@ const LandingPage = () => {
                                 Non ancora pronto? Ti avvisiamo noi al lancio.
                             </button>
                         </div>
-                    </div>
-                     <ScrollArrow targetId="come-funziona" />
-                </section>
-                
-                {/* Sezione 5: Come Funziona (sezione standard, non a schermo intero) */}
-                 <section id="come-funziona" className="standard-section">
-                     <div className="landing-container">
+                    </section>
+
+                    {/* Sezione 4: Come Funziona */}
+                    <section className="page-section">
                         <h2 className="section-title">Il tuo flusso di studio, finalmente preciso.</h2>
                         <div className="steps-grid">
                             <div className="step"><div className="step-icon"><Icon name="upload" /></div><h3>1. Carica i PDF</h3><p>Unisci il PDF del corso, appunti e slide in un unico posto per dire addio al caos.</p></div>
                             <div className="step"><div className="step-icon"><Icon name="calendar" /></div><h3>2. Ricevi il Piano</h3><p>L'AI genera un piano di studi giornaliero e ottimizzato per non farti perdere tempo.</p></div>
                             <div className="step"><div className="step-icon"><Icon name="brain" /></div><h3>3. Fatti Interrogare</h3><p>Mettiti alla prova con un'AI che simula un esame reale e valuta la tua preparazione.</p></div>
                         </div>
-                     </div>
-                </section>
+                    </section>
+                </main>
 
-                 <footer className="landing-footer">
-                    <div className="landing-container">
-                        <p>© 2025 Mentora. Per rendere lo studio universitario meno stressante.</p>
-                    </div>
+                <footer className="landing-footer">
+                    <p>© 2025 Mentora. Per rendere lo studio universitario meno stressante.</p>
                 </footer>
-            </main>
+            </div>
         </div>
     );
 };

@@ -6,164 +6,130 @@
 /* VARIABILI DI DESIGN */
 :root { --bg-color: #030712; --text-primary: #F9FAFB; --text-secondary: #9CA3AF; --accent-primary: #A78BFA; --accent-secondary: #C4B5FD; --border-color: rgba(255, 255, 255, 0.1); --card-bg: #111827; }
 
-/* STILI GLOBALI */
-html {
-    scroll-behavior: smooth;
-}
-
+/* STILI GLOBALI E RESET */
+html { scroll-behavior: smooth; }
 .landing-body { 
     background-color: var(--bg-color); 
     color: var(--text-secondary); 
     font-family: 'Inter', sans-serif; 
     line-height: 1.6; 
-    position: relative; 
-    overflow: hidden; /* Impedisce lo scroll orizzontale */
+    overflow-x: hidden; /* Previene lo scroll orizzontale indesiderato */
 }
-
 .background-glow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 600px; background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 60%); z-index: 0; pointer-events: none; }
 
-/* CONTENITORE PRINCIPALE DELLE SEZIONI A SCORRIMENTO */
-.sections-container {
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
-    width: 100vw;
+/* CONTENITORE PRINCIPALE */
+.landing-container { 
+    position: relative; 
+    z-index: 1; 
+    max-width: 850px; 
+    margin: 0 auto; 
+    padding: 0 1rem; /* Padding laterale di base per mobile */
 }
 
-/* --- STILI PER LE SEZIONI A SCHERMO INTERO --- */
-.full-page-section {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 2rem;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    box-sizing: border-box; /* Cruciale per includere il padding nel calcolo dell'altezza */
+/* HEADER */
+.hero { 
+    text-align: center; 
+    padding: 2rem 0; /* Rimosso lo spazio extra */
 }
-
-.content-wrapper {
-    max-width: 850px;
-    width: 100%;
-    text-align: center;
-}
-
-/* HERO SECTION (Sezione 1) */
 .hero-logo { 
-    width: clamp(40px, 10vw, 60px); 
+    width: clamp(40px, 10vw, 50px); 
     height: auto;
-    margin-bottom: 2rem;
-}
-.main-title {
-    color: var(--text-primary);
-    font-size: clamp(2rem, 8vw, 3.5rem);
-    font-weight: 900;
-    line-height: 1.2;
-    max-width: 700px;
-    margin: 0 auto;
-    text-shadow: 0 0 25px rgba(167, 139, 250, 0.5);
 }
 
-/* FRECCIA DI SCROLL */
-.scroll-arrow-container {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    cursor: pointer;
-    z-index: 10;
+/* LAYOUT DELLE SEZIONI */
+.page-section {
+    padding: clamp(4rem, 12vw, 6rem) 0; /* Spaziatura verticale responsive */
+    border-top: 1px solid var(--border-color);
 }
-.arrow-icon {
-    width: clamp(36px, 10vw, 48px);
-    height: clamp(36px, 10vw, 48px);
-    color: var(--text-secondary);
-    opacity: 0.6;
-    animation: bounce 2.5s infinite ease-in-out;
+.page-section:first-of-type {
+    border-top: none; /* La prima sezione non ha il bordo sopra */
+    padding-top: 2rem;
 }
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-15px); }
-    60% { transform: translateY(-8px); }
+.section-title { 
+    color: var(--text-primary); 
+    font-size: clamp(2rem, 7vw, 2.8rem); 
+    text-align: center; 
+    margin-bottom: clamp(3rem, 8vw, 4rem); 
+    font-weight: 700;
 }
-.arrow-icon:hover { opacity: 1; }
 
-/* TITOLI DI SEZIONE */
-.section-title { color: var(--text-primary); font-size: clamp(1.8rem, 6vw, 2.8rem); text-align: center; margin-bottom: 3rem; }
-
-/* SCENA STATICA AMICO (Sezione 2) */
-.scenario-scene { display: flex; flex-direction: row; justify-content: center; align-items: flex-end; gap: 1rem; flex-wrap: nowrap; }
-.character-group { display: flex; flex-direction: column; align-items: center; gap: 1rem; flex-basis: 50%; min-width: 0; }
-.speech-bubble { position: relative; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem; width: 100%; box-shadow: 0 5px 15px rgba(0,0,0,0.2); line-height: 1.5; text-align: center; font-size: clamp(0.8rem, 2.5vw, 1rem); }
+/* SCENA STATICA AMICO - OTTIMIZZATA PER RIMANERE ORIZZONTALE */
+.scenario-scene { 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: flex-end; 
+    gap: 1rem; 
+    flex-wrap: nowrap; /* FORZA il layout orizzontale */
+}
+.character-group { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 1rem; 
+    flex-basis: 50%; 
+    min-width: 0; /* Permette al flex-item di restringersi */
+}
+.speech-bubble { 
+    position: relative; 
+    background: var(--card-bg); 
+    border: 1px solid var(--border-color); 
+    border-radius: 12px; 
+    padding: clamp(0.8rem, 3vw, 1rem); 
+    width: 100%; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+    line-height: 1.4; 
+    text-align: center; 
+    font-size: clamp(0.8rem, 2.5vw, 1rem); 
+}
 .speech-bubble::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid var(--card-bg); }
 .user-bubble-static { background-color: #2c2f3b; }
 .user-bubble-static::after { border-top-color: #2c2f3b; }
-.character-image { max-width: 150px; width: 100%; height: auto; }
+.character-image { 
+    max-width: clamp(90px, 25vw, 150px); /* Immagine responsive */
+    width: 100%; 
+    height: auto; 
+}
 
-/* SCENA CHAT CON PERSONAGGI (Sezione 3) */
+/* SCENA CHAT CON PERSONAGGI */
 .chat-scene-container { position: relative; max-width: 700px; margin: 0 auto; width: 100%; }
 .characters-container { display: flex; justify-content: space-between; align-items: flex-end; padding: 0; margin-top: -60px; pointer-events: none; }
-.scene-character { max-height: 160px; width: auto; pointer-events: all; }
+.scene-character { max-height: clamp(100px, 30vw, 160px); width: auto; pointer-events: all; padding-top: 50px; }
 
-/* CONTENITORE CTA (Sezione 4) */
-.cta-container { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; max-width: 650px; width: 100%; }
-.hero-offer-box-revamped { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 1rem 1.5rem; width: 100%; display: flex; flex-direction: column; text-align: center; gap: 1rem; cursor: pointer; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; }
-.hero-offer-box-revamped:hover { transform: translateY(-5px) scale(1.02); border-color: rgba(167, 139, 250, 0.5); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
-.offer-tag-revamped { font-size: 0.9rem; font-weight: 600; color: var(--accent-primary); display: block; margin-bottom: 0.5rem; }
-.offer-text-content h3 { color: var(--text-primary); margin: 0; font-size: clamp(1.1rem, 4vw, 1.3rem); }
+/* CONTENITORE CTA */
+.cta-container { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; max-width: 650px; margin: 0 auto; }
+.hero-offer-box-revamped { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.5rem; width: 100%; display: flex; flex-direction: column; text-align: center; gap: 1rem; cursor: pointer; transition: transform 0.3s ease; }
+.hero-offer-box-revamped:hover { transform: translateY(-5px); }
+.offer-tag-revamped { font-size: 0.9rem; font-weight: 600; color: var(--accent-primary); }
+.offer-text-content h3 { color: var(--text-primary); margin: 0; font-size: clamp(1.2rem, 5vw, 1.3rem); }
 .offer-price-button { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 100%; }
 .old-price-revamped { font-size: 1.2rem; text-decoration: line-through; color: var(--text-secondary); opacity: 0.7; }
-.cta-button-revamped { display: inline-block; background-image: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); color: #030712; font-size: 1.1rem; font-weight: 700; padding: 14px 28px; border-radius: 12px; text-decoration: none; text-align: center; width: 100%; }
-.waitlist-button { background: transparent; border: 1px solid var(--border-color); font-family: 'Inter', sans-serif; color: var(--text-secondary); padding: 16px 28px; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s; }
-.waitlist-button:hover { background-color: var(--card-bg); border-color: var(--accent-secondary); color: var(--text-primary); transform: translateY(-2px); }
+.cta-button-revamped { display: block; background-image: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); color: #030712; font-size: 1.1rem; font-weight: 700; padding: 14px 20px; border-radius: 12px; text-decoration: none; text-align: center; width: 100%; }
+.waitlist-button { background: transparent; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 14px 20px; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; text-align: center; width: 100%; transition: background-color 0.3s ease, color 0.3s ease; }
+.waitlist-button:hover { background-color: var(--card-bg); color: var(--text-primary); }
 
-/* SEZIONI STANDARD (dopo lo scroll) */
-.standard-section { padding: 6rem 20px; border-top: 1px solid var(--border-color); }
-.landing-container { max-width: 850px; margin: 0 auto; width: 100%; }
+/* GRIGLIA "COME FUNZIONA" */
 .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; text-align: center; }
-.step { transition: transform 0.3s ease; }
-.step:hover { transform: translateY(-5px); }
-.step-icon { width: 64px; height: 64px; margin: 0 auto 1.5rem auto; background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-primary); transition: box-shadow 0.3s ease, transform 0.3s ease; }
-.step:hover .step-icon { box-shadow: 0 0 15px rgba(167, 139, 250, 0.5); transform: scale(1.1); }
+.step:hover { transform: translateY(-5px); transition: transform 0.3s ease; }
+.step-icon { width: 64px; height: 64px; margin: 0 auto 1.5rem auto; background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-primary); }
 .step h3 { color: var(--text-primary); font-size: 1.2rem; margin-bottom: 0.5rem; }
 
 /* FOOTER */
-.landing-footer { text-align: center; padding: 3rem 0; border-top: 1px solid var(--border-color); font-size: 0.9rem; background-color: var(--bg-color); }
+.landing-footer { text-align: center; padding: 3rem 1rem; border-top: 1px solid var(--border-color); font-size: 0.9rem; }
 
-
-/* --- MEDIA QUERY PER RESPONSIVITÀ SU MOBILE --- */
-@media (max-width: 768px) {
-    .full-page-section {
-        padding: 1rem; /* Meno padding laterale */
-    }
-    .character-image {
-        max-width: 120px; /* Riduci ulteriormente le immagini dei personaggi */
-    }
+/* --- MEDIA QUERY SPECIFICA PER DESKTOP (per allargare un po' il box offerta) --- */
+@media (min-width: 768px) {
     .hero-offer-box-revamped {
-        /* Già impostato a colonna, va bene */
+        flex-direction: row;
+        text-align: left;
+        padding: 1.5rem 2rem;
     }
-    .characters-container {
-        margin-top: -40px; /* Riduci la sovrapposizione della chat */
+    .offer-price-button {
+        flex-direction: row;
+        width: auto;
+        gap: 1rem;
     }
-    .scene-character {
-        max-height: 120px; /* Riduci i personaggi nella scena della chat */
-    }
-}
-
-@media (max-width: 480px) {
-    .scenario-scene {
-        gap: 0.5rem; /* Avvicina ancora di più i personaggi */
-    }
-    .character-image {
-        max-width: 90px; /* Immagini ancora più piccole per schermi stretti */
-    }
-    .speech-bubble {
-        padding: 0.8rem;
-        line-height: 1.4;
-    }
-    .hero-offer-box-revamped {
-        padding: 1rem;
+    .cta-button-revamped, .waitlist-button {
+        width: auto;
     }
 }

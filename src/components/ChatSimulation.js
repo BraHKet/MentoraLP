@@ -8,11 +8,11 @@ const notificationSoundPath = '/suono.mp3';
 
 const chatScript = [
     { sender: 'ai', type: 'text', content: 'Ottimo. Mi parli del Secondo Principio della Dinamica.' },
-    { sender: 'user', type: 'text', content: 'Certo. Il principio afferma che la forza risultante applicata a un corpo è uguale al prodotto della sua massa per l\'accelerazione che subisce.' },
+    { sender: 'user', type: 'text', content: 'Certo. Il principio afferma che la forza.....' },
     { sender: 'ai', type: 'text', content: 'Enunciazione corretta. Adesso mi scriva la formula e mi disegni un diagramma di corpo libero per un oggetto che scivola su un piano inclinato.' },
     { sender: 'user', type: 'text', content: 'Subito. Ecco la formula e il disegno:' },
-    { sender: 'user', type: 'image', content: '/images/disegno-fisica.png' }, // Ho rimesso il percorso corretto per l'immagine
-    { sender: 'ai', type: 'text', content: 'Perfetto. Il diagramma mostra correttamente la forza peso, la reazione vincolare e la forza di attrito. Preparazione eccellente. ✨' },
+    { sender: 'user', type: 'image', content: '/disegno-fisica.png' }, // Ho rimesso il percorso corretto per l'immagine
+    { sender: 'ai', type: 'text', content: 'Perfetto. Il diagramma mostra correttamente la forza peso... Passiamo al prossimo argomento. ' },
 ];
 
 const ChatSimulation = () => {

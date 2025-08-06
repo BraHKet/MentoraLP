@@ -5,14 +5,22 @@ import './LandingPage.css';
 import { landingPageEvent, purchaseButtonEvent, mailCollectEvent } from './metaevents.js';
 import ChatSimulation from './ChatSimulation';
 
-// --- NUOVO COMPONENTE FRECCIA ---
-const ArrowIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="arrow-icon">
-        <polyline points="6 9 12 15 18 9"></polyline>
-    </svg>
-);
+// --- COMPONENTE FRECCIA RIUTILIZZABILE ---
+const ScrollArrow = ({ targetId }) => {
+    const handleClick = () => {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+    };
 
-// Componente helper per le icone SVG
+    return (
+        <div className="scroll-arrow-container" onClick={handleClick}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="arrow-icon">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    );
+};
+
+// Componente icone standard
 const Icon = ({ name, className }) => {
     const iconPaths = {
         upload: <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" x2="12" y1="3" y2="15" /></>,
@@ -27,125 +35,122 @@ const Icon = ({ name, className }) => {
     );
 };
 
-const trackEvent = (eventName, eventParams = {}) => {
-    if (typeof window.gtag === 'function') {
-        window.gtag('event', eventName, eventParams);
-    } else {
-        console.warn('Google Analytics gtag function not found.');
-    }
-};
-
 const LandingPage = () => {
     useEffect(() => {
-        landingPageEvent();
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
+        const handleKeyDown = (e) => {
+            const sections = Array.from(document.getElementsByClassName('full-page-section'));
+            if (sections.length === 0) return;
+            const currentSectionIndex = sections.findIndex(section => {
+                const rect = section.getBoundingClientRect();
+                return rect.top >= 0 && rect.top < window.innerHeight / 2;
             });
-        }, { threshold: 0.1 });
-        const sections = document.querySelectorAll('.fade-in-section');
-        sections.forEach(section => observer.observe(section));
-        return () => sections.forEach(section => observer.unobserve(section));
+            if (currentSectionIndex === -1) return;
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextSection = sections[currentSectionIndex + 1];
+                if (nextSection) nextSection.scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prevSection = sections[currentSectionIndex - 1];
+                if (prevSection) prevSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
 
     const paymentLink = "https://tally.so/r/wAeeQy";
     const waitlistLink = "https://tally.so/r/n0RRaA";
 
-    const handleOfferClick = () => {
-        trackEvent('Offerta-click', { currency: 'EUR', value: 19.00, event_category: 'Conversion', event_label: 'Early Bird 3 Mesi' });
-        purchaseButtonEvent();
-        window.open(paymentLink, '_blank', 'noopener,noreferrer');
-    };
-
-    const handleWaitlistClick = (e) => {
-        trackEvent('mailCollection-click', { event_category: 'Engagement', event_label: 'Waitlist Signup' });
-        mailCollectEvent();
-        window.open(waitlistLink, '_blank', 'noopener,noreferrer');
-    };
+    const handleOfferClick = () => { window.open(paymentLink, '_blank', 'noopener,noreferrer'); };
+    const handleWaitlistClick = () => { window.open(waitlistLink, '_blank', 'noopener,noreferrer'); };
 
     return (
         <div className="landing-body">
             <div className="background-glow"></div>
-            <div className="landing-container">
-                
-
-                <main>
-                    
-                    {/* Atto 2: Il Problema */}
-                    <section className="friend-scenario-section fade-in-section">
-                        <header className="hero">
-                    <div className="hero-brand">
+            <main className="sections-container">
+                {/* Sezione 1: Hero con Logo e Titolo */}
+                <section id="hero-section" className="full-page-section">
+                    <div className="content-wrapper">
                         <img src="/logo.png" alt="Mentora Logo" className="hero-logo" />
+                        <h1 className="main-title">Il Tutor AI che ti fa arrivare sicuro all'esame.</h1>
                     </div>
-                </header>
+                    <ScrollArrow targetId="scena-amico" />
+                </section>
+
+                {/* Sezione 2: Il Problema */}
+                <section id="scena-amico" className="full-page-section">
+                    <div className="content-wrapper">
                         <h2 className="section-title">Studiare con un amico a volte non basta...</h2>
                         <div className="scenario-scene">
                             <div className="character-group">
-                                <div className="speech-bubble friend-bubble">
-                                    Uhm... allora, parlami di quella... cosa... la termodinamica?
-                                </div>
+                                <div className="speech-bubble friend-bubble">Uhm... allora, parlami di quella... cosa... la termodinamica?</div>
                                 <img src="/omino1.png" alt="Amico che interroga" className="character-image" />
                             </div>
                             <div className="character-group">
-                                <div className="speech-bubble user-bubble-static">
-                                    <em>(Non sa neanche cosa chiedere...)</em>
-                                </div>
+                                <div className="speech-bubble user-bubble-static"><em>(Non sa neanche cosa chiedere...)</em></div>
                                 <img src="/robot.png" alt="Utente che viene interrogato" className="character-image" />
                             </div>
                         </div>
-                    </section>
-
-                    {/* --- FRECCIA 2 --- */}
-                    <div className="arrow-divider">
-                        <ArrowIcon />
                     </div>
-
-                    {/* Atto 3: La Soluzione */}
-                    <section className="ai-scenario-section fade-in-section">
+                    <ScrollArrow targetId="scena-ai" />
+                </section>
+                
+                {/* Sezione 3: La Soluzione */}
+                <section id="scena-ai" className="full-page-section">
+                     <div className="content-wrapper">
                         <h2 className="section-title">Ecco come ti prepara un vero esperto.</h2>
                         <div className="chat-scene-container">
                             <ChatSimulation />
                             <div className="characters-container">
-                                <img src="/robot.png" alt="Tutor AI che saluta" className="scene-character robot-character" />
-                                <img src="/omino1.png" alt="Studente che risponde" className="scene-character student-character" />
+                                <img src="/robot.png" alt="Tutor AI" className="scene-character robot-character" />
+                                <img src="/omino1.png" alt="Studente" className="scene-character student-character" />
                             </div>
                         </div>
-                    </section>
-                    
-                    {/* Atto 4: La Call to Action */}
-                    <div id="offer-section" className="cta-container fade-in-section">
-                        <div className="hero-offer-box-revamped" onClick={handleOfferClick}>
-                            <div className="offer-text-content">
-                                <span className="offer-tag-revamped">🔥 Offerta Pre-Lancio (solo per i primi 100)</span>
-                                <h3>Ottieni 3 Mesi di Accesso a Mentora</h3>
-                            </div>
-                            <div className="offer-price-button">
-                                <span className="old-price-revamped">€90</span>
-                                <span className="cta-button-revamped">Sblocca Ora a soli €19</span>
-                            </div>
-                        </div>
-                        <button className="waitlist-button" onClick={handleWaitlistClick}>
-                            Non ancora pronto? Ti avvisiamo noi al lancio.
-                        </button>
                     </div>
+                    <ScrollArrow targetId="offerta" />
+                </section>
 
-                    <section className="how-it-works fade-in-section">
+                {/* Sezione 4: Offerta */}
+                <section id="offerta" className="full-page-section">
+                    <div className="content-wrapper">
+                        <div id="offer-section" className="cta-container">
+                             <div className="hero-offer-box-revamped" onClick={handleOfferClick}>
+                                <div className="offer-text-content">
+                                    <span className="offer-tag-revamped">🔥 Offerta Pre-Lancio (solo per i primi 100)</span>
+                                    <h3>Ottieni 3 Mesi di Accesso a Mentora</h3>
+                                </div>
+                                <div className="offer-price-button">
+                                    <span className="old-price-revamped">€90</span>
+                                    <span className="cta-button-revamped">Sblocca Ora a soli €19</span>
+                                </div>
+                            </div>
+                            <button className="waitlist-button" onClick={handleWaitlistClick}>
+                                Non ancora pronto? Ti avvisiamo noi al lancio.
+                            </button>
+                        </div>
+                    </div>
+                     <ScrollArrow targetId="come-funziona" />
+                </section>
+                
+                {/* Sezione 5: Come Funziona (sezione standard, non a schermo intero) */}
+                 <section id="come-funziona" className="standard-section">
+                     <div className="landing-container">
                         <h2 className="section-title">Il tuo flusso di studio, finalmente preciso.</h2>
                         <div className="steps-grid">
                             <div className="step"><div className="step-icon"><Icon name="upload" /></div><h3>1. Carica i PDF</h3><p>Unisci il PDF del corso, appunti e slide in un unico posto per dire addio al caos.</p></div>
                             <div className="step"><div className="step-icon"><Icon name="calendar" /></div><h3>2. Ricevi il Piano</h3><p>L'AI genera un piano di studi giornaliero e ottimizzato per non farti perdere tempo.</p></div>
                             <div className="step"><div className="step-icon"><Icon name="brain" /></div><h3>3. Fatti Interrogare</h3><p>Mettiti alla prova con un'AI che simula un esame reale e valuta la tua preparazione.</p></div>
                         </div>
-                    </section>
-                </main>
+                     </div>
+                </section>
 
-                <footer className="landing-footer">
-                    <p>© 2025 Mentora. Per rendere lo studio universitario meno stressante.</p>
+                 <footer className="landing-footer">
+                    <div className="landing-container">
+                        <p>© 2025 Mentora. Per rendere lo studio universitario meno stressante.</p>
+                    </div>
                 </footer>
-            </div>
+            </main>
         </div>
     );
 };

@@ -7,12 +7,12 @@ import './ChatSimulation.css'; // Non sono necessarie modifiche al CSS
 const notificationSoundPath = '/suono.mp3';
 
 const chatScript = [
-    { sender: 'ai', type: 'text', content: 'Ottimo. Mi parli del Secondo Principio della Dinamica.' },
+    { sender: 'ai', type: 'text', content: 'Ottimo. Mi parli del Secondo Principio della Termodinamica.' },
     { sender: 'user', type: 'text', content: 'Certo. Il principio afferma che la forza.....' },
-    { sender: 'ai', type: 'text', content: 'Enunciazione corretta. Adesso mi scriva la formula e mi disegni un diagramma di corpo libero per un oggetto che scivola su un piano inclinato.' },
-    { sender: 'user', type: 'text', content: 'Subito. Ecco la formula e il disegno:' },
+    //{ sender: 'ai', type: 'text', content: 'Enunciazione corretta. Adesso mi scriva la formula e mi disegni un diagramma di corpo libero per un oggetto che scivola su un piano inclinato.' },
+    //{ sender: 'user', type: 'text', content: 'Subito. Ecco la formula e il disegno:' },
     { sender: 'user', type: 'image', content: '/meme.jpg' }, // Ho rimesso il percorso corretto per l'immagine
-    { sender: 'ai', type: 'text', content: 'Perfetto. Il diagramma mostra correttamente la forza peso... Passiamo al prossimo argomento. ' },
+    { sender: 'ai', type: 'text', content: 'Perfetto. Passiamo al prossimo argomento. ' },
 ];
 
 const ChatSimulation = () => {

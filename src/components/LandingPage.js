@@ -46,11 +46,11 @@ const LandingPage = () => {
                         <div className="scenario-scene">
                             <div className="character-group">
                                 <div className="speech-bubble friend-bubble">Uhm... allora, parlami di quella... cosa... la termodinamica?</div>
-                                <img src="/omino1.png" alt="Amico che interroga" className="character-image" />
+                                <img src="/omino3.png" alt="Amico che interroga" className="character-image" />
                             </div>
                             <div className="character-group">
                                 <div className="speech-bubble user-bubble-static"><em>(Non sa neanche cosa chiedere...)</em></div>
-                                <img src="/robot.png" alt="Utente che viene interrogato" className="character-image" />
+                                <img src="/wojak4.png" alt="Utente che viene interrogato" className="character-image" />
                             </div>
                         </div>
                     </section>
@@ -61,8 +61,8 @@ const LandingPage = () => {
                         <div className="chat-scene-container">
                             <ChatSimulation />
                             <div className="characters-container">
-                                <img src="/robot.png" alt="Tutor AI" className="scene-character robot-character" />
-                                <img src="/omino1.png" alt="Studente" className="scene-character student-character" />
+                                <img src="/robot2.png" alt="Tutor AI" className="scene-character robot-character" />
+                                <img src="/woj6.png" alt="Studente" className="scene-character student-character" />
                             </div>
                         </div>
                     </section>

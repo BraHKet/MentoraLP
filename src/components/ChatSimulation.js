@@ -8,10 +8,10 @@ const notificationSoundPath = '/suono.mp3';
 
 const chatScript = [
     { sender: 'ai', type: 'text', content: 'Ottimo. Mi parli del Secondo Principio della Termodinamica.' },
-    { sender: 'user', type: 'text', content: 'Certo. Il principio afferma che la forza.....' },
+    { sender: 'user', type: 'text', content: 'Certo. Il principio afferma che il calore non può fluire da un corpo più ferddo ad uno più caldo.....bla bla' },
     //{ sender: 'ai', type: 'text', content: 'Enunciazione corretta. Adesso mi scriva la formula e mi disegni un diagramma di corpo libero per un oggetto che scivola su un piano inclinato.' },
     //{ sender: 'user', type: 'text', content: 'Subito. Ecco la formula e il disegno:' },
-    { sender: 'user', type: 'image', content: '/meme.jpg' }, // Ho rimesso il percorso corretto per l'immagine
+    { sender: 'user', type: 'image', content: '/immagine3.png' }, // Ho rimesso il percorso corretto per l'immagine
     { sender: 'ai', type: 'text', content: 'Perfetto. Passiamo al prossimo argomento. ' },
 ];
 

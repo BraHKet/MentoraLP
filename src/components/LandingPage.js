@@ -67,6 +67,22 @@ const LandingPage = () => {
                         </div>
                     </section>
                     
+
+                    <section className="page-section">
+                        <div className="poll-container">
+                            <h3 className="poll-question">Chi scegli per la tua preparazione?</h3>
+                            <div className="poll-options">
+                                <button className="poll-button poll-button-mentora">
+                                    Voglio Mentora
+                                </button>
+                                <button className="poll-button poll-button-friend">
+                                    Mi fido del mio amico sotto cannabis
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+
                     {/* Sezione 3: La Call to Action */}
                     <section className="page-section">
                         <div id="offer-section" className="cta-container">

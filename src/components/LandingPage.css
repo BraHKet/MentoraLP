@@ -366,3 +366,63 @@ html {
         width: auto;
     }
 }
+
+/* 4. STILI PER IL SONDAGGIO
+/* -------------------------------------------------- */
+
+.poll-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: clamp(2rem, 5vw, 2.5rem);
+    max-width: 600px;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.poll-question {
+    color: var(--text-primary);
+    font-size: clamp(1.3rem, 5vw, 1.5rem);
+    font-weight: 700;
+}
+
+.poll-options {
+    display: flex;
+    flex-direction: column; /* Impilati su mobile di default */
+    gap: 1rem;
+    width: 100%;
+    max-width: 350px;
+}
+
+.poll-button {
+    background: #2c2f3b; /* Sfondo neutro */
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.poll-button:hover {
+    transform: translateY(-3px);
+}
+
+/* Colore in hover per la scelta "Mentora" */
+.poll-button-mentora:hover {
+    background-color: var(--accent-primary);
+    color: var(--button-text-dark);
+    border-color: var(--accent-primary);
+}
+
+/* Colore in hover per la scelta "Amico" */
+.poll-button-friend:hover {
+    background-color: #4B5563; /* Un grigio più scuro e "triste" */
+    border-color: #4B5563;
+}

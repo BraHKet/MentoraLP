@@ -27,29 +27,51 @@ const LandingPage = () => {
 
     const paymentLink = "https://tally.so/r/wAeeQy";
     const waitlistLink = "https://tally.so/r/n0RRaA";
-    const pollFormActionURL = "https://tally.so/r/3xWzVv";
 
     // --- STATO E RIFERIMENTI PER IL SONDAGGIO ---
-    const [pollSubmitted, setPollSubmitted] = useState(false);
-    const [pollChoice, setPollChoice] = useState('');
-    const formRef = useRef(null); // Riferimento al nostro form nascosto
+    const [pollSubmitted, setPollSubmitted] = useState(false); // Ti serve solo questo
 
     // --- FUNZIONE CORRETTA PER GESTIRE IL CLICK SUL SONDAGGIO ---
     const handlePollClick = (choice) => {
-        if (pollSubmitted) return; // Non fare nulla se già inviato
+    if (pollSubmitted) return;
 
-        setPollChoice(choice); // Imposta la scelta nello stato
-        setPollSubmitted(true); // Fornisci un feedback immediato all'utente
+    // 1. Recupera i voti esistenti dal localStorage
+    // Usiamo un blocco try-catch nel caso in cui i dati fossero corrotti
+    let existingVotes = [];
+    try {
+        // JSON.parse() trasforma la stringa salvata di nuovo in un array
+        const savedVotes = localStorage.getItem('pollVotes');
+        if (savedVotes) {
+            existingVotes = JSON.parse(savedVotes);
+        }
+    } catch (error) {
+        console.error("Errore nel leggere i voti dal localStorage:", error);
+        existingVotes = []; // In caso di errore, ripartiamo da un array vuoto
+    }
+
+    // 2. Crea il nuovo voto con un codice unico e la risposta
+    const newVote = {
+        id: Date.now(), // Usiamo il timestamp attuale come codice unico semplice
+        answer: choice
     };
 
+    // 3. Aggiungi il nuovo voto all'array esistente
+    const updatedVotes = [...existingVotes, newVote];
+
+    // 4. Salva l'array aggiornato nel localStorage
+    // JSON.stringify() trasforma l'array in una stringa per poterlo salvare
+    localStorage.setItem('pollVotes', JSON.stringify(updatedVotes));
+
+    // 5. Stampa tutti i voti raccolti fino ad ora nella console
+    console.log("--- Voti raccolti fino a questo momento ---");
+    console.table(updatedVotes); // console.table() li mostra in una tabella leggibile!
+
+    // 6. Aggiorna l'interfaccia utente come prima
+    setPollSubmitted(true);
+};
     // Questo useEffect si attiva quando la scelta viene impostata,
     // e invia il form nascosto.
-    useEffect(() => {
-        if (pollChoice && formRef.current) {
-            formRef.current.submit(); // Invia il form in background
-            console.log(`Invio del voto "${pollChoice}" in background...`);
-        }
-    }, [pollChoice]); // Si attiva solo quando pollChoice cambia
+    
 
     const handleOfferClick = () => { window.open(paymentLink, '_blank', 'noopener,noreferrer'); };
     const handleWaitlistClick = () => { window.open(waitlistLink, '_blank', 'noopener,noreferrer'); };
@@ -94,7 +116,7 @@ const LandingPage = () => {
                     </section>
                     
 
-                        {/* SEZIONE SONDAGGIO MODIFICATA CON LA LOGICA CORRETTA */}
+                        {/* SEZIONE SONDAGGIO MODIFICATA CON LA LOGICA CORRETTA localStorage.removeItem('pollVotes'); in console per elinare dati*/}
             <section className="page-section">
                 
                 <div className="poll-container">
@@ -117,30 +139,7 @@ const LandingPage = () => {
                     </div>
                 </div>
             </section>
-
-            {/* ----- ELEMENTI NASCOSTI PER L'INVIO SILENZIOSO ----- */}
-            {/* 
-              Questo form invia i dati all'iframe 'hidden_iframe', 
-              quindi l'utente non vede alcuna navigazione.
-            */}
-            <form 
-                ref={formRef}
-                action={pollFormActionURL}
-                method="POST"
-                target="hidden_iframe"
-                className="hidden-form"
-            >
-                <input type="hidden" name="sceltaPoll" value={pollChoice} />
-            </form>
-
-            <iframe 
-                name="hidden_iframe" 
-                className="hidden-iframe"
-                // L'onLoad può essere usato per confermare il caricamento, ma non è strettamente necessario
-                onLoad={() => { console.log("Iframe ha completato il caricamento."); }}
-            ></iframe>
-            {/* ----------------------------------------------------------- */}
-
+            
 
 
                     {/* Sezione 3: La Call to Action */}

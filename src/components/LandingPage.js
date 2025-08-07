@@ -1,6 +1,6 @@
 // File: LandingPage.js (aggiornato e ottimizzato)
 
-import React, { useEffect } from 'react';
+import React, { useEffect,useState, useRef } from 'react';
 import './LandingPage.css';
 import { landingPageEvent, purchaseButtonEvent, mailCollectEvent } from './metaevents.js';
 import ChatSimulation from './ChatSimulation';
@@ -27,10 +27,36 @@ const LandingPage = () => {
 
     const paymentLink = "https://tally.so/r/wAeeQy";
     const waitlistLink = "https://tally.so/r/n0RRaA";
+    const pollFormActionURL = "https://tally.so/r/3xWzVv";
+
+    // --- STATO E RIFERIMENTI PER IL SONDAGGIO ---
+    const [pollSubmitted, setPollSubmitted] = useState(false);
+    const [pollChoice, setPollChoice] = useState('');
+    const formRef = useRef(null); // Riferimento al nostro form nascosto
+
+    // --- FUNZIONE CORRETTA PER GESTIRE IL CLICK SUL SONDAGGIO ---
+    const handlePollClick = (choice) => {
+        if (pollSubmitted) return; // Non fare nulla se già inviato
+
+        setPollChoice(choice); // Imposta la scelta nello stato
+        setPollSubmitted(true); // Fornisci un feedback immediato all'utente
+    };
+
+    // Questo useEffect si attiva quando la scelta viene impostata,
+    // e invia il form nascosto.
+    useEffect(() => {
+        if (pollChoice && formRef.current) {
+            formRef.current.submit(); // Invia il form in background
+            console.log(`Invio del voto "${pollChoice}" in background...`);
+        }
+    }, [pollChoice]); // Si attiva solo quando pollChoice cambia
 
     const handleOfferClick = () => { window.open(paymentLink, '_blank', 'noopener,noreferrer'); };
     const handleWaitlistClick = () => { window.open(waitlistLink, '_blank', 'noopener,noreferrer'); };
 
+    // --- NUOVA FUNZIONE PER GESTIRE IL CLICK SUL SONDAGGIO ---
+    
+    
     return (
         <div className="landing-body">
             <div className="background-glow"></div>
@@ -68,23 +94,58 @@ const LandingPage = () => {
                     </section>
                     
 
-                    <section className="page-section">
-                        <div className="poll-container">
-                            <h3 className="poll-question">Chi scegli per la tua preparazione?</h3>
-                            <div className="poll-options">
-                                <button className="poll-button poll-button-mentora">
-                                    Voglio Mentora
-                                </button>
-                                <button className="poll-button poll-button-friend">
-                                    Mi fido del mio amico sotto cannabis
-                                </button>
-                            </div>
-                        </div>
-                    </section>
+                        {/* SEZIONE SONDAGGIO MODIFICATA CON LA LOGICA CORRETTA */}
+            <section className="page-section">
+                
+                <div className="poll-container">
+                    <h3 className="poll-question">Chi scegli per la tua preparazione?</h3>
+                    <div className="poll-options">
+                        <button 
+                            className="poll-button poll-button-mentora"
+                            onClick={() => handlePollClick('Mentora')}
+                            disabled={pollSubmitted}
+                        >
+                            {pollSubmitted ? 'Grazie!' : '🧠 Voglio Mentora'}
+                        </button>
+                        <button 
+                            className="poll-button poll-button-friend"
+                            onClick={() => handlePollClick('Amico')}
+                            disabled={pollSubmitted}
+                        >
+                            {pollSubmitted ? 'Voto registrato' : 'Mi fido del mio amico sotto stupefacenti'}
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            {/* ----- ELEMENTI NASCOSTI PER L'INVIO SILENZIOSO ----- */}
+            {/* 
+              Questo form invia i dati all'iframe 'hidden_iframe', 
+              quindi l'utente non vede alcuna navigazione.
+            */}
+            <form 
+                ref={formRef}
+                action={pollFormActionURL}
+                method="POST"
+                target="hidden_iframe"
+                className="hidden-form"
+            >
+                <input type="hidden" name="sceltaPoll" value={pollChoice} />
+            </form>
+
+            <iframe 
+                name="hidden_iframe" 
+                className="hidden-iframe"
+                // L'onLoad può essere usato per confermare il caricamento, ma non è strettamente necessario
+                onLoad={() => { console.log("Iframe ha completato il caricamento."); }}
+            ></iframe>
+            {/* ----------------------------------------------------------- */}
+
 
 
                     {/* Sezione 3: La Call to Action */}
                     <section className="page-section">
+                        <h2 className="section-title">Lascia la mail o ottieni l'accesso!</h2>
                         <div id="offer-section" className="cta-container">
                             <div className="hero-offer-box-revamped" onClick={handleOfferClick}>
                                 <div className="offer-text-content">

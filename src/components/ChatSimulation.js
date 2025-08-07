@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './ChatSimulation.css'; // Non sono necessarie modifiche al CSS
 
 // Percorso del file audio che metterai nella cartella `public`
-const notificationSoundPath = '/suono.mp3';
+const notificationSoundPath = '/suono1.mp3';
 
 const chatScript = [
     { sender: 'ai', type: 'text', content: 'Ottimo. Mi parli del Secondo Principio della Termodinamica.' },

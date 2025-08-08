@@ -1,6 +1,6 @@
 // File: LandingPage.js (aggiornato e ottimizzato)
 
-import React, { useEffect,useState, useRef } from 'react';
+import React, { useEffect,useState } from 'react';
 import './LandingPage.css';
 import { landingPageEvent, purchaseButtonEvent, mailCollectEvent } from './metaevents.js';
 import ChatSimulation from './ChatSimulation';
@@ -23,6 +23,7 @@ const Icon = ({ name, className }) => {
 const LandingPage = () => {
 
     useEffect(() => {
+        landingPageEvent();
         // Funzione per inviare l'evento page_view a GA4
         const trackPageView = (path, title) => {
             if (typeof window.gtag === 'function') {
@@ -113,8 +114,8 @@ const LandingPage = () => {
     // e invia il form nascosto.
     
 
-    const handleOfferClick = () => { window.open(paymentLink, '_blank', 'noopener,noreferrer'); };
-    const handleWaitlistClick = () => { window.open(waitlistLink, '_blank', 'noopener,noreferrer'); };
+    const handleOfferClick = () => {purchaseButtonEvent(); window.open(paymentLink, '_blank', 'noopener,noreferrer'); };
+    const handleWaitlistClick = () => { mailCollectEvent(); window.open(waitlistLink, '_blank', 'noopener,noreferrer'); };
 
     // --- NUOVA FUNZIONE PER GESTIRE IL CLICK SUL SONDAGGIO ---
     

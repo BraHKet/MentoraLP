@@ -21,9 +21,49 @@ const Icon = ({ name, className }) => {
 };
 
 const LandingPage = () => {
+
     useEffect(() => {
-        // Logica per animazioni su scroll, se presente
-    }, []);
+        // Funzione per inviare l'evento page_view a GA4
+        const trackPageView = (path, title) => {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'page_view', {
+                    page_path: path,
+                    page_title: title,
+                    page_location: window.location.href // Mantiene l'URL reale
+                });
+                console.log(`GA4 Event Sent: page_view for ${title}`); // Log per il debug, puoi rimuoverlo in produzione
+            } else {
+                console.warn('gtag function not found. GA4 event not sent.');
+            }
+        };
+
+        const sections = document.querySelectorAll('.page-section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // Se la sezione è visibile per più del 50%
+                if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                    const sectionId = entry.target.id;
+                    const sectionTitle = entry.target.getAttribute('data-title');
+                    
+                    // Controlla se abbiamo già tracciato questa sezione per evitare doppioni
+                    if (sectionId && sectionTitle && !entry.target.hasAttribute('data-tracked')) {
+                        trackPageView(`/${sectionId}`, sectionTitle);
+                        entry.target.setAttribute('data-tracked', 'true'); // Marca la sezione come tracciata
+                    }
+                }
+            });
+        }, {
+            threshold: 0.5 // Si attiva quando il 50% della sezione è visibile
+        });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Pulisci l'observer quando il componente viene smontato
+        return () => sections.forEach(section => observer.unobserve(section));
+
+    }, []); // L'array vuoto assicura che questo effetto venga eseguito solo una volta
+    
 
     const paymentLink = "https://tally.so/r/wAeeQy";
     const waitlistLink = "https://tally.so/r/n0RRaA";

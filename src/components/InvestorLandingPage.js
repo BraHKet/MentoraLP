@@ -76,13 +76,13 @@ const InvestorLandingPage = () => {
                         <div className="team-grid">
                             <div className="team-member">
                                 {/* [PLACEHOLDER] Inserisci la tua foto */}
-                                <img src="/tuo-avatar.png" alt="Founder" className="team-photo" />
+                                
                                 <h3 className="team-name">Lorenzo Rizzo</h3>
                                 <p className="team-role">Founder & CEO</p>
                             </div>
                             <div className="team-member">
                                  {/* [PLACEHOLDER] Inserisci la foto del tuo co-founder */}
-                                <img src="/cofounder-avatar.png" alt="Co-founder" className="team-photo" />
+                                
                                 <h3 className="team-name">Luca Parini</h3>
                                 <p className="team-role">Co-Founder</p>
                             </div>

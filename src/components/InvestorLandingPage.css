@@ -225,10 +225,13 @@
 }
 
 .investor-footer a {
-    color: var(--text-secondary);
+    color: #FBBF24; /* Un giallo oro, molto leggibile e professionale */
     text-decoration: none;
+    font-weight: 600; /* Leggermente grassetto per risaltare ancora di più */
+    transition: color 0.2s ease; /* Transizione fluida per l'hover */
 }
 
 .investor-footer a:hover {
-    text-decoration: underline;
+    color: #FFD700; /* Un giallo leggermente più brillante al passaggio del mouse */
+    text-decoration: underline; /* Manteniamo la sottolineatura per chiarezza */
 }

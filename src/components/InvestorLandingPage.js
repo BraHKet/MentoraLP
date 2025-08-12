@@ -38,12 +38,12 @@ const InvestorLandingPage = () => {
                         <div className="investor-visual-proof">
                             <div className="video-responsive-container">
                                 <iframe
-                                    src={`https://www.youtube.com/embed/${youtubeVideoId}`}
-                                    title="Mentora Video Pitch"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
+    src={`https://www.youtube.com/embed/${youtubeVideoId}?rel=0`}
+    title="Mentora Video Pitch"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+></iframe>
                             </div>
                         </div>
                     </section>

@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<InvestorLandingPage />} />
         <Route path="/purch-red" element={<PurchRedirect />} />
+        <Route path="/lp" element={<LandingPage />} />
       </Routes>
     </Router>
   );

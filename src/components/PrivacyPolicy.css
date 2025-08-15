@@ -1,0 +1,56 @@
+/* LegalPages.css */
+
+.legal-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px 40px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+  color: #333;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.legal-container h1 {
+  font-size: 2.2em;
+  color: #111;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+.legal-container h2 {
+  font-size: 1.6em;
+  color: #222;
+  margin-top: 40px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.legal-container p, .legal-container li {
+  font-size: 1.1em;
+  color: #444;
+}
+
+.legal-container ul {
+  padding-left: 25px;
+}
+
+.legal-container a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.legal-container a:hover {
+  text-decoration: underline;
+}
+
+.legal-container .important-notice {
+  background-color: #fffbe6;
+  border-left: 4px solid #ffc107;
+  padding: 15px 20px;
+  margin: 20px 0;
+  border-radius: 4px;
+}
